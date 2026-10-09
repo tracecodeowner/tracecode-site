@@ -95,7 +95,12 @@ const mergeUserProfile = async (authUser) => {
   try {
     const { data: profileData, error } = await supabase.from('users').select('*').eq('id', authUser.id).single();
     if (!error && profileData) {
-      return { ...authUser, ...profileData };
+      return {
+        ...authUser,
+        ...profileData,
+        apiKey: profileData.apikey,
+        referralCode: profileData.referralcode,
+      };
     }
   } catch (e) {
     // ignore
@@ -297,22 +302,73 @@ export const base44 = {
             }
             const apiKey = `local_${Math.random().toString(36).slice(2, 10)}`;
             const referralCode = `R${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
-            const credits = 2;
-            const payloadToUpsert = {
-              id: user.id,
-              email: user.email,
-              apiKey,
-              referralCode,
-              credits,
-              role: 'anon',
-            };
-            const { data: up, error } = await supabase.from('users').upsert(payloadToUpsert, { returning: 'representation' });
-            if (error) {
+            const { data: existingProfile, error: lookupError } = await supabase
+              .from('users')
+              .select('id, apikey, referralcode')
+              .eq('id', user.id)
+              .maybeSingle();
+            if (lookupError) {
+              const err = new Error('Failed to load user profile');
+              err.status = 500;
+              throw err;
+            }
+
+            let profile;
+            if (existingProfile) {
+              const updates = {};
+              if (!existingProfile.apikey) updates.apikey = apiKey;
+              if (!existingProfile.referralcode) updates.referralcode = referralCode;
+              if (Object.keys(updates).length > 0) {
+                const { data, error } = await supabase
+                  .from('users')
+                  .update(updates)
+                  .eq('id', user.id)
+                  .select('*')
+                  .single();
+                if (error) {
+                  const err = new Error('Failed to update user profile');
+                  err.status = 500;
+                  throw err;
+                }
+                profile = data;
+              } else {
+                profile = existingProfile;
+              }
+            } else {
+              const { data, error } = await supabase
+                .from('users')
+                .insert({
+                  id: user.id,
+                  email: user.email,
+                  apikey: apiKey,
+                  referralcode: referralCode,
+                  credits: 2,
+                  role: 'anon',
+                })
+                .select('*')
+                .single();
+              if (error) {
+                const err = new Error('Failed to create profile');
+                err.status = 500;
+                throw err;
+              }
+              profile = data;
+            }
+
+            if (!profile) {
               const err = new Error('Failed to create profile');
               err.status = 500;
               throw err;
             }
-            return { data: { profile: up?.[0] || payloadToUpsert } };
+            return {
+              data: {
+                profile: {
+                  ...profile,
+                  apiKey: profile.apikey,
+                  referralCode: profile.referralcode,
+                },
+              },
+            };
           }
 
           const existing = JSON.parse(localStorage.getItem('dev_user') || 'null');
