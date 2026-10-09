@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Wallet, Loader2, AlertCircle, ExternalLink, Copy, Check } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 
-const TRAKTEER_URL = 'https://trakteer.id/tracecode';
+const TRAKTEER_URL = 'http://teer.id/tracecode';
 
 export default function PaymentMethodModal({ pkg, open, onClose }) {
   const [processing, setProcessing] = useState(false);
