@@ -56,7 +56,7 @@ Simbol `␊` = LF (Line Feed, `0x0A`), `␞` = RS (Record Separator, `0x1E`), `�
 | Inspector byte-level (hex, escaped, visual, byte map) | ✅ |
 | Download PNG barcode | ✅ |
 | Copy payload ke clipboard | ✅ |
-| Sistem kredit & top-up (Stripe) | ✅ |
+| Sistem kredit & top-up via Trakteer | ✅ |
 | Riwayat generate & transaksi | ✅ |
 | Auth (email/password, Google OAuth, OTP) | ✅ |
 | Row-Level Security per user | ✅ |
@@ -75,7 +75,7 @@ Simbol `␊` = LF (Line Feed, `0x0A`), `␞` = RS (Record Separator, `0x1E`), `�
 | **Backend** | Base44 BaaS (Deno Deploy edge functions, TypeScript) |
 | **Database** | Base44 Entities (MongoDB-backed, JSON schema) |
 | **Auth** | Base44 Auth (email/OTP/Google OAuth) |
-| **Pembayaran** | Stripe (via Base44) |
+| **Pembayaran** | Trakteer webhook via Supabase Edge Functions |
 | **Runtime Backend** | Deno (TypeScript) — `base44/functions/*/entry.ts` |
 | **Runtime Frontend** | Browser (ESM) — Vite dev server / static build |
 | **Package Manager** | npm |
@@ -105,7 +105,7 @@ Simbol `␊` = LF (Line Feed, `0x0A`), `␞` = RS (Record Separator, `0x1E`), `�
 | `jspdf` + `html2canvas` | — | Export PDF (opsional) |
 | `@base44/sdk` | ^0.8.40 | Base44 client SDK |
 | `@base44/vite-plugin` | ^1.0.30 | Vite plugin untuk Base44 |
-| `@stripe/stripe-js` | ^5.2.0 | Pembayaran Stripe |
+| `@stripe/stripe-js` | ^5.2.0 | Library Stripe (dependency lama; checkout aktif memakai Trakteer) |
 | shadcn/ui (Radix UI) | berbagai | Komponen UI primitives |
 
 ### Backend (Deno / edge functions)
@@ -201,7 +201,7 @@ tracecode-site/
 │   │   ├── generateBarcode/
 │   │   │   └── entry.ts            # ⭐ Endpoint generate barcode + deduct credit
 │   │   └── topUpCredits/
-│   │       └── entry.ts           # Endpoint top-up kredit via Stripe
+│   │       └── entry.ts           # Endpoint legacy dinonaktifkan; kredit hanya via webhook
 │   │
 │   ├── shared/                    # Logic bersama frontend & backend
 │   │   ├── aamva.js               # ⭐ ENGINE: generatePayload, parsePayload, validate
@@ -993,6 +993,18 @@ Cek `base44/functions/generateBarcode/entry.ts` — pastikan `base44.entities.Us
 Untuk backend Supabase, penyesuaian saldo memakai RPC `admin_adjust_user_credits`. Jalankan SQL di `supabase/init.sql` sekali melalui **Supabase Dashboard → SQL Editor** setelah memperbarui project. RPC memeriksa `public.users.role = 'admin'` di database dan memperbarui saldo secara atomik, termasuk untuk akun admin yang sedang login. Tanpa fungsi ini, frontend akan menampilkan error dari Supabase dan saldo tidak berubah.
 
 Setelah SQL berhasil dijalankan, refresh halaman Admin dan coba tambahkan bilangan bulat positif. Jika ditolak, pastikan baris akun admin di `public.users` memiliki `role` bernilai persis `admin`; response/error yang sebenarnya akan tampil di halaman Admin.
+
+### Menyiapkan pembayaran Trakteer
+
+Untuk tutorial lengkap melalui Supabase Dashboard **tanpa CLI**, termasuk menyiapkan unit,
+deploy Edge Functions, mengatur secret dan webhook, serta menguji pembelian, lihat
+[TRAKTEER_SETUP.md](./TRAKTEER_SETUP.md).
+
+Paket aktif: **$5 untuk 2 credits**. Unit Trakteer wajib bernama `2 Barcode` dengan harga
+**Rp100.000 per unit**. Order dibuat saat user login; customer harus menyalin kode unik
+order ke `supporter_message`. Hanya pembayaran yang cocok pada kode order, unit, jumlah,
+dan nominal yang akan menambah credits. Test webhook tanpa order nyata dapat merespons
+`200 OK` dengan `unknown_order`; itu tidak menambah credits.
 
 ### Frontend Tidak Connect ke Backend
 

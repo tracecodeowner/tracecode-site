@@ -8,7 +8,7 @@ const PACKAGES = [
   { key: 'starter', credits: 2, priceUsd: 5, perCredit: '2.50' },
 ];
 
-export default function TopUpModal({ open, onClose, onSuccess }) {
+export default function TopUpModal({ open, onClose }) {
   const { user } = useAuth();
   const [selectedPkg, setSelectedPkg] = useState(null);
 
@@ -70,7 +70,6 @@ export default function TopUpModal({ open, onClose, onSuccess }) {
         pkg={selectedPkg}
         open={!!selectedPkg}
         onClose={() => setSelectedPkg(null)}
-        onSuccess={onSuccess}
       />
     </>
   );

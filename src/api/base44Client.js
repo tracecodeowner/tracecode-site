@@ -243,6 +243,13 @@ export const base44 = {
   functions: {
     invoke: async (name, payload = {}) => {
       switch (name) {
+        case 'createTrakteerOrder': {
+          const { data, error } = await supabase.functions.invoke('create-trakteer-order', {
+            body: payload,
+          });
+          if (error) throw error;
+          return { data };
+        }
         case 'generateBarcode': {
           const { formData, jurisdictionCode, profileKey } = payload;
           const generated = generatePayload(formData, jurisdictionCode, profileKey);

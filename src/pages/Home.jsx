@@ -201,7 +201,7 @@ export default function Home() {
 
       {/* Modals */}
       <LoginPromptModal open={showLoginPrompt} onClose={() => setShowLoginPrompt(false)} />
-      <TopUpModal open={showTopUp} onClose={() => setShowTopUp(false)} onSuccess={() => checkUserAuth?.(true)} />
+      <TopUpModal open={showTopUp} onClose={() => setShowTopUp(false)} />
     </div>
   );
 }
