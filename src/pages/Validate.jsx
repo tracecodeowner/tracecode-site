@@ -1,10 +1,13 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShieldCheck, ShieldAlert, AlertCircle, AlertTriangle, ScanLine, Loader2 } from 'lucide-react';
 import { validatePayload, unescapePayload } from '@/lib/aamva';
+import { useAuth } from '@/lib/AuthContext';
 
 export default function Validate() {
+  const { user } = useAuth();
+  const isAdmin = user?.role === 'admin';
   const location = useLocation();
   const [payload, setPayload] = useState('');
   const [result, setResult] = useState(null);
@@ -87,7 +90,8 @@ export default function Validate() {
                   {result.valid ? 'VALID PAYLOAD' : 'INVALID PAYLOAD'}
                 </div>
                 <div className="text-xs text-muted-foreground">
-                  Total length: {result.totalLength} bytes · {result.errors.length} errors · {result.warnings.length} warnings
+                  {isAdmin && <>Total length: {result.totalLength} bytes · </>}
+                  {result.errors.length} errors · {result.warnings.length} warnings
                 </div>
               </div>
             </div>
@@ -123,7 +127,7 @@ export default function Validate() {
             )}
 
             {/* Header info */}
-            {result.header && (
+            {isAdmin && result.header && (
               <div className="rounded-xl border border-border bg-card p-5">
                 <div className="text-[10px] text-muted-foreground tracking-widest mb-3">PARSED HEADER</div>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs">
@@ -145,7 +149,7 @@ export default function Validate() {
             )}
 
             {/* Subfiles */}
-            {result.subfiles.length > 0 && (
+            {isAdmin && result.subfiles.length > 0 && (
               <div className="rounded-xl border border-border bg-card p-5">
                 <div className="text-[10px] text-muted-foreground tracking-widest mb-3">SUBFILES</div>
                 <table className="w-full text-xs">
@@ -172,7 +176,7 @@ export default function Validate() {
             )}
 
             {/* Parsed fields */}
-            {result.fields.length > 0 && (
+            {isAdmin && result.fields.length > 0 && (
               <div className="rounded-xl border border-border bg-card p-5">
                 <div className="text-[10px] text-muted-foreground tracking-widest mb-3">PARSED FIELDS</div>
                 <div className="overflow-x-auto scrollbar-thin">
