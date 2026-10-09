@@ -465,6 +465,10 @@ Output build ada di `dist/` — file static yang bisa di-host di mana saja (Verc
 base44 dashboard open
 ```
 
+> **Deploy SPA ke Vercel:** `vercel.json` mengarahkan direct request untuk client-side routes
+> (mis. `/pricing`) ke `index.html`, sehingga reload atau membuka URL tersebut langsung tidak
+> menghasilkan 404. Pastikan Vercel menggunakan root repository ini dan build output `dist`.
+
 ---
 
 ## Push ke Git / GitHub
