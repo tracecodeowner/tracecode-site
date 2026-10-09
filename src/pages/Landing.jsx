@@ -1,11 +1,42 @@
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/lib/AuthContext';
 import { Barcode, ShieldCheck, Zap, Globe, Code2, ArrowRight, Check, Terminal, Users } from 'lucide-react';
+import { generatePayload } from '@/lib/aamva';
+import { generateBarcodeDataURL } from '@/lib/pdf417';
 import SupportButton from '@/components/SupportButton';
 
 export default function Landing() {
   const { isAuthenticated } = useAuth();
+  const barcodeDataURL = useMemo(() => {
+    const { payloadString } = generatePayload({
+      dlNumber: 'NV1234567',
+      lastName: 'SAMPLE',
+      firstName: 'JANE',
+      middleName: 'A',
+      address: '123 MAIN ST',
+      city: 'LAS VEGAS',
+      state: 'NV',
+      zipCode: '89101',
+      country: 'USA',
+      birthDate: '01151985',
+      issueDate: '07242023',
+      expiryDate: '07242031',
+      sex: '2',
+      height: '65',
+      weight: '140',
+      eyeColor: 'BRO',
+      hairColor: 'BRO',
+      dlClass: 'D',
+    }, 'NV', 'scandit');
+
+    return generateBarcodeDataURL(payloadString, {
+      columns: 9,
+      eclevel: 5,
+      scale: 2,
+    });
+  }, []);
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -96,26 +127,15 @@ export default function Landing() {
             transition={{ delay: 0.4 }}
             className="mt-16 relative inline-block"
           >
-            <div className="bg-white rounded-2xl p-8 shadow-2xl shadow-accent/10">
-              <div className="flex flex-col gap-1">
-                {Array.from({ length: 8 }).map((_, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    transition={{ delay: 0.5 + i * 0.05 }}
-                    className="flex gap-0.5 h-3 origin-left"
-                  >
-                    {Array.from({ length: 40 }).map((_, j) => (
-                      <div
-                        key={j}
-                        className="h-full"
-                        style={{ width: `${Math.random() > 0.5 ? 3 : 1}px`, background: Math.random() > 0.4 ? '#000' : 'transparent' }}
-                      />
-                    ))}
-                  </motion.div>
-                ))}
-              </div>
+            <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-2xl shadow-accent/10">
+              <motion.img
+                src={barcodeDataURL}
+                alt="PDF417 barcode example"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                className="block w-full max-w-[320px] h-auto origin-left"
+              />
             </div>
             <motion.div
               animate={{ y: [0, -10, 0] }}
