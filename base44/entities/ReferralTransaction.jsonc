@@ -1,0 +1,58 @@
+{
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "earning",
+        "withdrawal"
+      ],
+      "description": "earning = commission from referred user, withdrawal = user cashed out to credits"
+    },
+    "amountUsd": {
+      "type": "number",
+      "description": "Amount in USD"
+    },
+    "creditsConverted": {
+      "type": "number",
+      "description": "Credits received (withdrawals only)"
+    },
+    "referredEmail": {
+      "type": "string",
+      "description": "Email of the referred user (earnings only)"
+    },
+    "percent": {
+      "type": "number",
+      "description": "Commission percentage applied"
+    },
+    "description": {
+      "type": "string",
+      "description": "Transaction description"
+    }
+  },
+  "required": [
+    "type",
+    "amountUsd"
+  ],
+  "name": "ReferralTransaction",
+  "type": "object",
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

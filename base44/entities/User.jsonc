@@ -1,0 +1,118 @@
+{
+  "properties": {
+    "role": {
+      "type": "string",
+      "description": "The role of the user in the app",
+      "enum": [
+        "admin",
+        "user"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "Account status",
+      "enum": [
+        "active",
+        "banned",
+        "suspended"
+      ],
+      "default": "active"
+    },
+    "credits": {
+      "type": "number",
+      "description": "Credit balance for barcode generation",
+      "default": 0
+    },
+    "apiKey": {
+      "type": "string",
+      "description": "Developer API key for barcode generation via API"
+    },
+    "referralCode": {
+      "type": "string",
+      "description": "This user's referral code (shared to invite others)"
+    },
+    "referredBy": {
+      "type": "string",
+      "description": "Referral code of the user who referred this user"
+    },
+    "referralBalance": {
+      "type": "number",
+      "description": "Current referral earnings in USD (available to withdraw)",
+      "default": 0
+    },
+    "referralCount": {
+      "type": "number",
+      "description": "Number of users referred by this user",
+      "default": 0
+    },
+    "referralPayments": {
+      "type": "number",
+      "description": "Total number of payments made by referred users",
+      "default": 0
+    },
+    "referralEarned": {
+      "type": "number",
+      "description": "Total lifetime referral earnings in USD",
+      "default": 0
+    },
+    "referralPercent": {
+      "type": "number",
+      "description": "Referral commission percentage",
+      "default": 10
+    },
+    "defaultJurisdiction": {
+      "type": "string",
+      "description": "Default jurisdiction code for generation"
+    },
+    "defaultProfile": {
+      "type": "string",
+      "description": "Default profile key"
+    },
+    "defaultEclevel": {
+      "type": "number",
+      "description": "Default PDF417 error correction level",
+      "default": 5
+    },
+    "defaultScale": {
+      "type": "number",
+      "description": "Default barcode scale",
+      "default": 3
+    },
+    "storeHistory": {
+      "type": "boolean",
+      "description": "Whether to store generation history",
+      "default": true
+    },
+    "storeRawPayloads": {
+      "type": "boolean",
+      "description": "Whether to store raw payloads",
+      "default": false
+    },
+    "lastLoginDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last login timestamp"
+    },
+    "lastIP": {
+      "type": "string",
+      "description": "Last known IP address"
+    },
+    "device": {
+      "type": "string",
+      "description": "Device type (Desktop, Mobile, Tablet)"
+    },
+    "browser": {
+      "type": "string",
+      "description": "Browser name"
+    },
+    "country": {
+      "type": "string",
+      "description": "Visitor country (ISO 2-letter code from IP geolocation)"
+    }
+  },
+  "required": [
+    "role"
+  ],
+  "name": "User",
+  "type": "object"
+}

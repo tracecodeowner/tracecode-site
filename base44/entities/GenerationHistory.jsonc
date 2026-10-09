@@ -1,0 +1,126 @@
+{
+  "properties": {
+    "jurisdiction": {
+      "type": "string",
+      "description": "Jurisdiction code (e.g. NV)"
+    },
+    "jurisdictionName": {
+      "type": "string",
+      "description": "Full jurisdiction name"
+    },
+    "profile": {
+      "type": "string",
+      "description": "Profile key used"
+    },
+    "aamvaVersion": {
+      "type": "string",
+      "description": "AAMVA version"
+    },
+    "jurisdictionVersion": {
+      "type": "string",
+      "description": "Jurisdiction version"
+    },
+    "iin": {
+      "type": "string",
+      "description": "Issuer Identification Number"
+    },
+    "validationStatus": {
+      "type": "string",
+      "enum": [
+        "valid",
+        "invalid",
+        "warning"
+      ],
+      "description": "Validation status of the payload"
+    },
+    "payloadLength": {
+      "type": "number",
+      "description": "Total payload length in bytes"
+    },
+    "subfileLength": {
+      "type": "number",
+      "description": "DL subfile length in bytes"
+    },
+    "subfileType": {
+      "type": "string",
+      "description": "Subfile type (DL)"
+    },
+    "offset": {
+      "type": "number",
+      "description": "DL subfile offset"
+    },
+    "numberOfEntries": {
+      "type": "number",
+      "description": "Number of subfile entries"
+    },
+    "barcodeStatus": {
+      "type": "string",
+      "enum": [
+        "generated",
+        "failed"
+      ],
+      "description": "Barcode generation status"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "web",
+        "api"
+      ],
+      "description": "Generation source (web UI or API)"
+    },
+    "rawPayload": {
+      "type": "string",
+      "description": "Raw payload (only stored if storeRawPayloads is enabled)"
+    }
+  },
+  "required": [
+    "jurisdiction",
+    "profile",
+    "validationStatus",
+    "barcodeStatus"
+  ],
+  "name": "GenerationHistory",
+  "type": "object",
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}
