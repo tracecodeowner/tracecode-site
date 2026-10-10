@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calculator, Info, Check, AlertCircle, AlertTriangle } from 'lucide-react';
-import { validateField, normalizeValue, generateTestValue } from '@/lib/aamva';
+import { Calculator, Info, Check, AlertCircle } from 'lucide-react';
+import { validateField, generateTestValue } from '@/lib/aamva';
 
 export default function FormField({ field, value, onChange, jurisdictionCode }) {
   const [showHelp, setShowHelp] = useState(false);
@@ -115,7 +115,7 @@ export default function FormField({ field, value, onChange, jurisdictionCode }) 
       {field.fieldId === 'DAU' && value && (
         <div className="text-[10px] text-muted-foreground">{value} in ≈ {Math.round(value * 2.54)} cm</div>
       )}
-      {field.fieldId === 'DDB' && value && (
+      {field.fieldId === 'DAW' && value && (
         <div className="text-[10px] text-muted-foreground">{value} lb ≈ {Math.round(value * 0.453)} kg</div>
       )}
 

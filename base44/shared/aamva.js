@@ -34,6 +34,8 @@ export function normalizeValue(fieldDef, value, jurisdiction) {
     case 'DBB':
     case 'DBD':
     case 'DBA':
+    case 'DDB':
+    case 'DDJ':
       // Dates: normalize to MMDDCCYY (8 digits)
       v = v.replace(/[^0-9]/g, '');
       if (v.length === 8) return v;
@@ -45,16 +47,16 @@ export function normalizeValue(fieldDef, value, jurisdiction) {
       }
       return v;
     case 'DAU':
-      // Jika versi AAMVA 04 (seperti Hawaii), pakai format lama "XX in "
+      // Preserve the legacy AAMVA v04 height format used by Hawaii.
       if (jurisdiction && jurisdiction.aamvaVersion === '04') {
         v = v.replace(/[^0-9]/g, '');
         return v + ' in ';
       }
-      // WAJIB 3 digit angka (AAMVA Standard). Contoh: "69" -> "069"
+      // AAMVA height uses three digits followed by the inch unit (e.g. "069 in").
       v = v.replace(/[^0-9]/g, '');
-      return v.padStart(3, '0');
-    case 'DDB':
-      // WAJIB 3 digit angka. Contoh: "169" -> "169"
+      return `${v.padStart(3, '0')} in`;
+    case 'DAW':
+      // AAMVA weight is encoded as a three-digit value in pounds.
       v = v.replace(/[^0-9]/g, '');
       return v.padStart(3, '0');
     case 'DAJ':
@@ -163,20 +165,22 @@ export function generatePayload(data, jurisdictionCode, profileKey, options = {}
     let value = data[field.name];
     if (field.autoFill === 'jurisdiction') value = jur.code;
     if (field.autoFill === 'country') value = 'USA';
-    if (value === undefined || value === null || value === '') continue;
+    // For Minnesota, always include DAH even if empty (matches verified raw)
+    if ((value === undefined || value === null || value === '') && !(jur.code === 'MN' && field.fieldId === 'DAH')) continue;
     const normalized = normalizeValue(field, value, jur);
     if (normalized === '') continue;
     dlFields.push({ fieldId: field.fieldId, label: field.label, value: normalized, raw: value });
   }
 
-  // Build DL subfile bytes per AAMVA 2025 spec D.13 example:
-  // "DL" LF field1 LF field2 ... LF fieldN CR
+  // Build DL subfile bytes.
+  // Verified MN raw shows no LF between "DL" and the first field:
+  // DLDAQ...\nDCS...\r
   const dlSubfileBytes = [];
   dlSubfileBytes.push(...strToBytes('DL'));
-  for (const field of dlFields) {
-    dlSubfileBytes.push(LF); // LF before each field
+  dlFields.forEach((field, idx) => {
+    if (idx > 0) dlSubfileBytes.push(LF); // LF only between fields, not before the first
     dlSubfileBytes.push(...strToBytes(field.fieldId + field.value));
-  }
+  });
   dlSubfileBytes.push(segmentTerm); // CR at end
   const dlSubfileLength = dlSubfileBytes.length;
 
@@ -193,24 +197,52 @@ export function generatePayload(data, jurisdictionCode, profileKey, options = {}
     zkSubfileLength = zkSubfileBytes.length;
   }
 
-  // ✦ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ✦
-  // [ REAL ID FIX ] Build ZH subfile KHUSUS untuk Hawaii
-  // ✦ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ✦
-  let zhSubfileBytes = [];
-  let zhSubfileLength = 0;
-  if (jur.code === 'HI') {
-    zhSubfileBytes.push(...strToBytes('ZH'));
-    zhSubfileBytes.push(LF);
-    zhSubfileBytes.push(...strToBytes('ZHAH'));
-    zhSubfileBytes.push(LF);
-    zhSubfileBytes.push(...strToBytes('ZHB'));
-    zhSubfileBytes.push(LF);
-    zhSubfileBytes.push(...strToBytes('ZHCHIDL_L'));
-    zhSubfileBytes.push(segmentTerm);
-    zhSubfileLength = zhSubfileBytes.length;
+  // Extra jurisdiction-specific subfiles (e.g. ZM for Minnesota, ZH for Hawaii)
+  // Defined on the jurisdiction object as extraSubfiles: [{ type, fields: [{id, value}] }]
+  const extraSubfiles = Array.isArray(jur.extraSubfiles) ? jur.extraSubfiles : [];
+  // Keep legacy Hawaii ZH if no extraSubfiles defined
+  if (jur.code === 'HI' && extraSubfiles.length === 0) {
+    extraSubfiles.push({
+      type: 'ZH',
+      fields: [
+        { id: 'ZHA', value: 'H' },
+        { id: 'ZHB', value: '' },
+        { id: 'ZHC', value: 'HIDL_L' },
+      ],
+    });
   }
 
-  const numEntries = 1 + (jur.includeZk ? 1 : 0) + (jur.code === 'HI' ? 1 : 0);
+  const extraSubfileBytesList = [];
+  for (const es of extraSubfiles) {
+    const bytes = [];
+    // Special case: Minnesota ZM matches verified raw format exactly
+    // ZMZMAN\nZMBN\r  (no LF right after "ZM")
+    if (es.type === 'ZM' && es.rawFormat === 'mn-verified') {
+      bytes.push(...strToBytes('ZMZMAN'));
+      bytes.push(LF);
+      bytes.push(...strToBytes('ZMBN'));
+      bytes.push(segmentTerm);
+    } else if (es.type === 'ZH' && (es.rawFormat === 'hi-verified' || jur.code === 'HI')) {
+      // Verified HI: ZHZHAH\nZHB\nZHCHIDL_L\r  (length 21, no LF after ZH)
+      bytes.push(...strToBytes('ZHZHAH'));
+      bytes.push(LF);
+      bytes.push(...strToBytes('ZHB'));
+      bytes.push(LF);
+      bytes.push(...strToBytes('ZHCHIDL_L'));
+      bytes.push(segmentTerm);
+    } else {
+      bytes.push(...strToBytes(es.type || 'ZX'));
+      const fields = es.fields || [];
+      for (const f of fields) {
+        bytes.push(LF);
+        bytes.push(...strToBytes((f.id || '') + (f.value ?? '')));
+      }
+      bytes.push(segmentTerm);
+    }
+    extraSubfileBytesList.push({ type: es.type, bytes, length: bytes.length });
+  }
+
+  const numEntries = 1 + (jur.includeZk ? 1 : 0) + extraSubfileBytesList.length;
   const designatorSize = 10; // TYPE(2) + OFFSET(4) + LENGTH(4) — no trailing byte between designators
 
   // Build header fixed part per AAMVA 2025 spec D.12.3:
@@ -229,7 +261,12 @@ export function generatePayload(data, jurisdictionCode, profileKey, options = {}
   const totalHeaderLength = headerFixed.length + designatorSize * numEntries;
   const dlOffset = totalHeaderLength;
   const zkOffset = jur.includeZk ? dlOffset + dlSubfileLength : 0;
-  const zhOffset = jur.code === 'HI' ? dlOffset + dlSubfileLength + zkSubfileLength : 0;
+  let runningOffset = dlOffset + dlSubfileLength + (jur.includeZk ? zkSubfileLength : 0);
+  const extraOffsets = extraSubfileBytesList.map(es => {
+    const off = runningOffset;
+    runningOffset += es.length;
+    return { ...es, offset: off };
+  });
 
   // Build subfile designators (Table D.2): TYPE(2) + OFFSET(4) + LENGTH(4)
   const designators = [];
@@ -243,14 +280,15 @@ export function generatePayload(data, jurisdictionCode, profileKey, options = {}
     designators.push(...strToBytes(String(zkSubfileLength).padStart(4, '0')));
   }
 
-  if (jur.code === 'HI') {
-    designators.push(...strToBytes('ZH'));
-    designators.push(...strToBytes(String(zhOffset).padStart(4, '0')));
-    designators.push(...strToBytes(String(zhSubfileLength).padStart(4, '0')));
+  for (const es of extraOffsets) {
+    designators.push(...strToBytes(es.type));
+    designators.push(...strToBytes(String(es.offset).padStart(4, '0')));
+    designators.push(...strToBytes(String(es.length).padStart(4, '0')));
   }
 
   // Assemble full payload
-  const allBytes = [...headerFixed, ...designators, ...dlSubfileBytes, ...zkSubfileBytes, ...zhSubfileBytes];
+  const extraBytesFlat = extraOffsets.flatMap(es => es.bytes);
+  const allBytes = [...headerFixed, ...designators, ...dlSubfileBytes, ...zkSubfileBytes, ...extraBytesFlat];
   const payload = new Uint8Array(allBytes);
   const payloadString = bytesToStr(allBytes);
 
@@ -271,16 +309,15 @@ export function generatePayload(data, jurisdictionCode, profileKey, options = {}
     subfiles: [
       { type: 'DL', offset: dlOffset, length: dlSubfileLength, fields: dlFields },
       ...(jur.includeZk ? [{ type: 'ZK', offset: zkOffset, length: zkSubfileLength, fields: [] }] : []),
-      ...(jur.code === 'HI' ? [{ type: 'ZH', offset: zhOffset, length: zhSubfileLength, fields: [] }] : []),
+      ...extraOffsets.map(es => ({ type: es.type, offset: es.offset, length: es.length, fields: [] })),
     ],
     stats: {
       totalPayloadLength: allBytes.length,
       dlSubfileLength,
       zkSubfileLength,
-      zhSubfileLength: jur.code === 'HI' ? zhSubfileLength : null,
+      extraSubfiles: extraOffsets.map(es => ({ type: es.type, offset: es.offset, length: es.length })),
       dlOffset,
       zkOffset: jur.includeZk ? zkOffset : null,
-      zhOffset: jur.code === 'HI' ? zhOffset : null,
       dataElementSeparator: 'LF (0x0A)',
       recordSeparator: 'RS (0x1E)',
       segmentTerminator: 'CR (0x0D)',
@@ -425,12 +462,13 @@ export function parsePayload(payloadString) {
   for (const sf of subfiles) {
     if (sf.type !== 'DL') continue;
     const sfData = bytes.slice(sf.offset, sf.offset + sf.length);
-    // Find the first separator after "DL"
+    // Fields are LF-separated; older payloads may include a separator after "DL".
     let fpos = 2; // after "DL"
-    // Detect separator type
-    let sepByte = RS;
-    if (fpos < sfData.length && sfData[fpos] === LF) sepByte = LF;
-    fpos += 1; // skip first separator after subfile type
+    let sepByte = LF;
+    if (fpos < sfData.length && (sfData[fpos] === LF || sfData[fpos] === RS)) {
+      sepByte = sfData[fpos];
+      fpos += 1;
+    }
 
     const fields = [];
     let current = [];

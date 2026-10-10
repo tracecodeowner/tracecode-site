@@ -62,7 +62,7 @@ export default function Home() {
     for (const field of fields) {
       if (field.autoFill === 'jurisdiction') { filled[field.name] = jurisdiction; continue; }
       if (field.autoFill === 'country') { filled[field.name] = 'USA'; continue; }
-      const val = generateTestValue(field.fieldId, jurisdiction);
+      const val = generateTestValue(field.fieldId, jurisdiction, filled);
       if (val !== undefined && val !== null) filled[field.name] = val;
     }
     setFormData(filled);
