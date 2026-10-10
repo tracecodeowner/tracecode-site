@@ -65,6 +65,39 @@ test('auto-fill derives DDB from the state profile and DDJ from the birth date',
   );
 });
 
+test('AUTO FILL produces varied regex values and plausible California data', () => {
+  const originalRandom = Math.random;
+  let randomCall = 0;
+  Math.random = () => (randomCall++ % 10) / 10;
+  try {
+    const dlNumber = generateTestValue('DAQ', 'CA');
+    assert.match(dlNumber, /^[A-Z]\d{7}$/);
+    assert.ok(new Set(dlNumber).size > 2, 'repeated regex characters should be randomized independently');
+
+    const firstName = generateTestValue('DAC', 'CA');
+    const lastName = generateTestValue('DCS', 'CA');
+    assert.match(firstName, /^[A-Z]{3,}$/);
+    assert.match(lastName, /^[A-Z]{3,}$/);
+
+    const birthDate = generateTestValue('DBB', 'CA');
+    const birthMonth = Number(birthDate.slice(0, 2));
+    const birthDay = Number(birthDate.slice(2, 4));
+    const birthYear = Number(birthDate.slice(4));
+    const parsedBirthDate = new Date(Date.UTC(birthYear, birthMonth - 1, birthDay));
+    assert.equal(parsedBirthDate.getUTCMonth(), birthMonth - 1);
+    assert.equal(parsedBirthDate.getUTCDate(), birthDay);
+
+    const height = Number.parseInt(generateTestValue('DAU', 'CA'), 10);
+    const weight = Number(generateTestValue('DAW', 'CA'));
+    assert.ok(height >= 60 && height <= 79);
+    assert.ok(weight >= 100 && weight <= 249);
+    assert.ok(['LOS ANGELES', 'SAN DIEGO', 'SAN JOSE', 'FRESNO', 'SACRAMENTO']
+      .includes(generateTestValue('DAI', 'CA')));
+  } finally {
+    Math.random = originalRandom;
+  }
+});
+
 test('payload generation emits standard field IDs and normalized values', () => {
   const payload = generatePayload({
     dlNumber: 'NV1234567',

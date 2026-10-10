@@ -1514,6 +1514,9 @@ export function getFields(jurisdictionCode, profileKey) {
 
 const FIRST_NAMES = ['JAMES','JOHN','ROBERT','MICHAEL','WILLIAM','DAVID','RICHARD','JOSEPH','THOMAS','CHARLES','MARY','PATRICIA','JENNIFER','LINDA','BARBARA','ELIZABETH','SUSAN','JESSICA','SARAH','KAREN'];
 const LAST_NAMES = ['SMITH','JOHNSON','WILLIAMS','BROWN','JONES','GARCIA','MILLER','DAVIS','RODRIGUEZ','MARTINEZ','HERNANDEZ','LOPEZ','GONZALEZ','WILSON','ANDERSON','THOMAS','TAYLOR','MOORE','JACKSON','MARTIN'];
+const SEMANTIC_TEST_VALUE_FIELDS = new Set([
+  'DAD', 'DAG', 'DAI', 'DBB', 'DBC', 'DCA', 'DCB', 'DCD', 'DCS', 'DAC', 'DAU', 'DAW',
+]);
 const STREET_NAMES = ['MAIN','OAK','MAPLE','ELM','CEDAR','PINE','LAKE','HILL','PARK','RIVER','SUNSET','HIGHLAND','VALLEY','SPRING','FOREST'];
 const STREET_TYPES = ['ST','AVE','BLVD','DR','RD','LN','CT','WAY','PL','CIR'];
 const CITIES_BY_STATE = {
@@ -1831,22 +1834,23 @@ function generateRegexSample(pattern, minimumLength = 0) {
 
   const parseAlternation = () => {
     const branches = [];
-    let current = '';
+    let current = [];
+    const sequence = (terms) => () => terms.map((term) => term()).join('');
 
     while (position < pattern.length) {
       const character = pattern[position];
       if (character === ')') break;
       if (character === '|') {
-        branches.push(current);
-        current = '';
+        branches.push(sequence(current));
+        current = [];
         position += 1;
         continue;
       }
-      current += parseTerm();
+      current.push(parseTerm());
     }
 
-    branches.push(current);
-    return randomItem(branches);
+    branches.push(sequence(current));
+    return () => randomItem(branches)();
   };
 
   const parseCharacterClass = () => {
@@ -1886,10 +1890,11 @@ function generateRegexSample(pattern, minimumLength = 0) {
       }
     }
 
-    if (!negated) return randomItem(allowed.length ? allowed : ['A']);
+    if (!negated) return () => randomItem(allowed.length ? allowed : ['A']);
     const candidates = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const excluded = new Set(allowed);
-    return randomItem([...candidates].filter((character) => !excluded.has(character)));
+    const available = [...candidates].filter((character) => !excluded.has(character));
+    return () => randomItem(available);
   };
 
   const parseAtom = () => {
@@ -1906,21 +1911,21 @@ function generateRegexSample(pattern, minimumLength = 0) {
     }
     if (character === '\\' && position < pattern.length) {
       const escaped = pattern[position++];
-      if (escaped === 'd') return randomItem('0123456789');
-      if (escaped === 'D') return randomItem('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
-      if (escaped === 'w') return randomItem('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_');
-      if (escaped === 'W') return randomItem('- _.');
-      if (escaped === 's') return ' ';
-      if (escaped === 'S') return randomItem('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
-      return escaped;
+      if (escaped === 'd') return () => randomItem('0123456789');
+      if (escaped === 'D') return () => randomItem('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
+      if (escaped === 'w') return () => randomItem('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_');
+      if (escaped === 'W') return () => randomItem('- _.');
+      if (escaped === 's') return () => ' ';
+      if (escaped === 'S') return () => randomItem('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
+      return () => escaped;
     }
-    if (character === '^' || character === '$') return '';
-    if (character === '.') return randomItem('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
-    return character;
+    if (character === '^' || character === '$') return () => '';
+    if (character === '.') return () => randomItem('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
+    return () => character;
   };
 
   const parseTerm = () => {
-    let sample = parseAtom();
+    const sample = parseAtom();
     if (position >= pattern.length) return sample;
 
     let minimum = 1;
@@ -1952,11 +1957,11 @@ function generateRegexSample(pattern, minimumLength = 0) {
     if (pattern[position] === '?') position += 1;
 
     const count = minimum + Math.floor(Math.random() * (maximum - minimum + 1));
-    return sample.repeat(count);
+    return () => Array.from({ length: count }, () => sample()).join('');
   };
 
   try {
-    const sample = parseAlternation();
+    const sample = parseAlternation()();
     const matcher = new RegExp(`^(?:${pattern})$`);
     return matcher.test(sample) ? sample : '';
   } catch {
@@ -1995,6 +2000,10 @@ function generateRuleValue(rule) {
   if (!rule.pattern) {
     const value = rule.placeholder ? randomizePlaceholder(rule.placeholder) : '';
     return meetsLength(value) ? value : '';
+  }
+  if (placeholderMatches && meetsLength(rule.placeholder)) {
+    const sample = randomizePlaceholder(rule.placeholder);
+    if (meetsLength(sample) && patternMatches(sample, rule)) return sample;
   }
   for (let attempt = 0; attempt < 40; attempt += 1) {
     const sample = generateRegexSample(rule.pattern, minimumLength);
@@ -2074,6 +2083,7 @@ export function generateTestValue(fieldId, jurisdictionCode, data = {}) {
   const stateRules = getStateAutoCalcRules(jur?.code);
   const stateField = stateProfile?.fields?.find((field) => field.fieldId === fieldId);
   const autoCalcRule = stateRules[fieldId] || stateField;
+  const useSemanticValue = SEMANTIC_TEST_VALUE_FIELDS.has(fieldId);
 
   if (fieldId === 'DBD' && stateRules.DBD) {
     return randomIssueDate(stateRules.DBD);
@@ -2081,13 +2091,13 @@ export function generateTestValue(fieldId, jurisdictionCode, data = {}) {
   if (fieldId === 'DBA' && stateRules.DBA) {
     return calculateExpiryDate(stateRules.DBA, stateRules.DBD, data);
   }
-  if (autoCalcRule?.pattern || autoCalcRule?.placeholder) {
+  if (!useSemanticValue && (autoCalcRule?.pattern || autoCalcRule?.placeholder)) {
     const generated = generateRuleValue(autoCalcRule);
     if (generated) return generated;
   }
 
   // Use source-profile patterns before older hardcoded examples.
-  if (stateField?.pattern || stateField?.placeholder) {
+  if (!useSemanticValue && (stateField?.pattern || stateField?.placeholder)) {
     const generated = generateRuleValue(stateField);
     if (generated) return generated;
   }

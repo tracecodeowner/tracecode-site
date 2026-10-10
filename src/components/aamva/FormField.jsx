@@ -1,11 +1,12 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calculator, Info, Check, AlertCircle } from 'lucide-react';
-import { validateField, generateTestValue } from '@/lib/aamva';
+import { calculateField, validateField, generateTestValue } from '@/lib/aamva';
 
 export default function FormField({ field, value, onChange, jurisdictionCode, formData = {} }) {
   const [showHelp, setShowHelp] = useState(false);
   const [touched, setTouched] = useState(false);
+  const [calculationError, setCalculationError] = useState('');
 
   const validation = useMemo(
     () => (touched || value ? validateField(field, value) : { valid: true, error: null }),
@@ -37,6 +38,26 @@ export default function FormField({ field, value, onChange, jurisdictionCode, fo
 
   const handleCalculate = () => {
     const fieldId = field.aamvaFieldId || field.fieldId;
+    if (fieldId === 'DCF' || fieldId === 'DCK') {
+      const result = calculateField(
+        jurisdictionCode,
+        fieldId === 'DCF' ? 'DD' : 'ICN',
+        formData
+      );
+      if ('error' in result) {
+        setCalculationError(result.error);
+        return;
+      }
+      setCalculationError('');
+      onChange(field.name, result.value);
+      for (const [relatedField, relatedValue] of Object.entries(result.related || {})) {
+        onChange(relatedField === 'DD' ? 'dd' : 'icn', relatedValue);
+      }
+      setTouched(true);
+      return;
+    }
+
+    setCalculationError('');
     let testVal;
     if (fieldId === 'DCE') {
       testVal = generateTestValue(fieldId, jurisdictionCode, formData);
@@ -150,6 +171,18 @@ export default function FormField({ field, value, onChange, jurisdictionCode, fo
             </div>
           )}
         </div>
+      )}
+
+      {calculationError && (
+        <motion.div
+          role="alert"
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          className="flex items-center gap-1.5 text-[11px] text-destructive"
+        >
+          <AlertCircle className="w-3 h-3 shrink-0" />
+          {calculationError}
+        </motion.div>
       )}
 
       {/* Unit conversion hints */}

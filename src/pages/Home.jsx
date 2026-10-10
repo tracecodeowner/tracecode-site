@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/lib/AuthContext';
 import { base44 } from '@/api/base44Client';
-import { getJurisdiction, getFields, getHeaderDisplay } from '@/lib/aamva';
+import { calculateField, getJurisdiction, getFields, getHeaderDisplay } from '@/lib/aamva';
 import { generateBarcodeDataURL, downloadBarcodePNG } from '@/lib/pdf417';
 import { generateTestValue } from '@/lib/aamva';
 import JurisdictionSelector from '@/components/aamva/JurisdictionSelector';
@@ -12,6 +12,11 @@ import BarcodeResult from '@/components/aamva/BarcodeResult';
 import TopUpModal from '@/components/aamva/TopUpModal';
 import LoginPromptModal from '@/components/aamva/LoginPromptModal';
 import { Play, Loader2, Lock, AlertCircle, Sparkles, Wand2 } from 'lucide-react';
+
+const SOURCE_FIELD_VALUE_MAP = {
+  EYE2: { BLK: 'BLK', BLU: 'BLU', BRO: 'BRN', GRN: 'GRN', GRY: 'GRY', HAZ: 'HZL', MAR: 'MAR', PNK: 'PNK', DIC: 'DIC', UNK: 'UNK' },
+  HAIR2: { BLK: 'BLK', BLN: 'BLN', BRO: 'BRN', GRY: 'GRY', RED: 'AUB', SDY: 'SDY', WHI: 'WHI', UNK: 'UNK' },
+};
 
 export default function Home() {
   const { user, isAuthenticated, checkUserAuth } = useAuth();
@@ -71,16 +76,50 @@ export default function Home() {
   const handleAutoFill = () => {
     const filled = { state: jurisdiction, country: 'USA' };
     for (const field of fields) {
+      if (field.aamvaFieldId === 'DCF' || field.aamvaFieldId === 'DCK') continue;
       if (field.autoFill === 'jurisdiction') { filled[field.name] = jurisdiction; continue; }
       if (field.autoFill === 'country') { filled[field.name] = 'USA'; continue; }
       if (field.autoFill === 'stateRevision') {
         filled[field.name] = field.autoFillValue || '';
         continue;
       }
-      const val = generateTestValue(field.fieldId, jurisdiction, filled);
+      const generatedByRule = ['DDA', 'DCE'].includes(field.aamvaFieldId);
+      const options = field.options?.filter((option) => option.value !== '') || [];
+      const relatedOptionValue = SOURCE_FIELD_VALUE_MAP[field.fieldId]?.[
+        field.fieldId === 'EYE2' ? filled.eyeColor : filled.hairColor
+      ];
+      const val = field.notEncoded && field.placeholder
+        ? field.placeholder
+        : generatedByRule
+          ? generateTestValue(field.fieldId, jurisdiction, filled)
+          : relatedOptionValue && options.some((option) => option.value === relatedOptionValue)
+            ? relatedOptionValue
+          : options.length
+            ? options[Math.floor(Math.random() * options.length)].value
+            : generateTestValue(field.fieldId, jurisdiction, filled);
       if (val !== undefined && val !== null) filled[field.name] = val;
     }
+    const calculationErrors = [];
+    const calculationFields = {
+      ICN: fields.find((field) => field.aamvaFieldId === 'DCK'),
+      DD: fields.find((field) => field.aamvaFieldId === 'DCF'),
+    };
+    for (const field of ['ICN', 'DD']) {
+      const formField = calculationFields[field];
+      if (!formField) continue;
+      const result = calculateField(jurisdiction, field, filled);
+      if ('error' in result) {
+        calculationErrors.push(result.error);
+        continue;
+      }
+      filled[formField.name] = result.value;
+      for (const [relatedField, relatedValue] of Object.entries(result.related || {})) {
+        const relatedFormField = calculationFields[relatedField];
+        if (relatedFormField) filled[relatedFormField.name] = relatedValue;
+      }
+    }
     setFormData(filled);
+    setGenError(calculationErrors.length ? calculationErrors.join(' ') : null);
   };
 
   const handleGenerate = async () => {
