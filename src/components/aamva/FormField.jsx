@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Calculator, Info, Check, AlertCircle } from 'lucide-react';
 import { validateField, generateTestValue } from '@/lib/aamva';
 
-export default function FormField({ field, value, onChange, jurisdictionCode }) {
+export default function FormField({ field, value, onChange, jurisdictionCode, formData = {} }) {
   const [showHelp, setShowHelp] = useState(false);
   const [touched, setTouched] = useState(false);
 
@@ -36,8 +36,21 @@ export default function FormField({ field, value, onChange, jurisdictionCode }) 
     : null;
 
   const handleCalculate = () => {
-    const testVal = generateTestValue(field.fieldId, jurisdictionCode);
-    if (testVal) {
+    const fieldId = field.aamvaFieldId || field.fieldId;
+    let testVal;
+    if (fieldId === 'DCE') {
+      testVal = generateTestValue(fieldId, jurisdictionCode, formData);
+    } else if (field.autoFillValue !== undefined) {
+      testVal = field.autoFillValue;
+    } else if (field.options?.length) {
+      const options = field.options.filter((option) => option.value !== '');
+      testVal = options[Math.floor(Math.random() * options.length)]?.value;
+    } else if (field.notEncoded) {
+      testVal = field.placeholder || '';
+    } else {
+      testVal = generateTestValue(fieldId, jurisdictionCode, formData);
+    }
+    if (testVal !== undefined && testVal !== null && testVal !== '') {
       onChange(field.name, testVal);
       setTouched(true);
     }
@@ -50,29 +63,57 @@ export default function FormField({ field, value, onChange, jurisdictionCode }) 
           {field.label}
           {field.required && <span className="text-destructive">*</span>}
         </label>
-        <span className="text-[10px] text-muted-foreground font-mono px-1.5 py-0.5 rounded bg-secondary/50">{field.fieldId}</span>
+        <span
+          className="text-[10px] text-muted-foreground font-mono px-1.5 py-0.5 rounded bg-secondary/50"
+          title={field.notEncoded ? 'Source field is not encoded because it has no standard AAMVA data-element mapping.' : undefined}
+        >
+          {field.aamvaFieldId || field.sourceName || field.fieldId}
+        </span>
         {field.helpText && (
-          <button onMouseEnter={() => setShowHelp(true)} onMouseLeave={() => setShowHelp(false)} onClick={() => setShowHelp(!showHelp)} className="text-muted-foreground hover:text-accent">
-            <Info className="w-3.5 h-3.5" />
-          </button>
+          <span
+            className="relative inline-flex"
+            onMouseEnter={() => setShowHelp(true)}
+            onMouseLeave={() => setShowHelp(false)}
+          >
+            <button
+              type="button"
+              aria-label={`Help for ${field.label}`}
+              aria-describedby={showHelp ? `${field.fieldId}-help` : undefined}
+              aria-expanded={showHelp}
+              onFocus={() => setShowHelp(true)}
+              onBlur={() => setShowHelp(false)}
+              onClick={() => setShowHelp((visible) => !visible)}
+              className="text-muted-foreground hover:text-accent focus-visible:text-accent"
+            >
+              <Info className="w-3.5 h-3.5" />
+            </button>
+            <AnimatePresence>
+              {showHelp && (
+                <motion.div
+                  id={`${field.fieldId}-help`}
+                  role="tooltip"
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -5 }}
+                  className="absolute z-50 top-full left-0 mt-1 p-2.5 rounded-lg bg-popover border border-border text-[11px] text-muted-foreground shadow-xl max-w-xs w-max"
+                >
+                  {field.helpText}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </span>
         )}
         {field.calculator && (
-          <button onClick={handleCalculate} className="text-muted-foreground hover:text-accent ml-auto" title="Generate test value">
+          <button
+            type="button"
+            onClick={handleCalculate}
+            className="text-muted-foreground hover:text-accent ml-auto"
+            title="Generate test value"
+            aria-label={`Calculate ${field.label}`}
+          >
             <Calculator className="w-3.5 h-3.5" />
           </button>
         )}
-        <AnimatePresence>
-          {showHelp && field.helpText && (
-            <motion.div
-              initial={{ opacity: 0, y: -5 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -5 }}
-              className="absolute z-50 mt-1 p-2.5 rounded-lg bg-popover border border-border text-[11px] text-muted-foreground shadow-xl max-w-xs"
-            >
-              {field.helpText}
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
 
       {field.type === 'select' ? (
@@ -94,7 +135,7 @@ export default function FormField({ field, value, onChange, jurisdictionCode }) 
           <input
             type={field.type === 'number' ? 'number' : 'text'}
             value={displayValue}
-            placeholder={field.placeholder || field.type === 'date' ? 'MM/DD/YYYY' : field.helpText || ''}
+            placeholder={field.placeholder || (field.type === 'date' ? 'MM/DD/YYYY' : '')}
             onChange={(e) => {
               const raw = e.target.value.replace(/\//g, '');
               onChange(field.name, raw);

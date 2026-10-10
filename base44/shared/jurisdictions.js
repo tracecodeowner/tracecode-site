@@ -1,3 +1,6 @@
+import STATE_PROFILES from './stateProfiles.json' with { type: 'json' };
+import STATE_AUTO_CALC from './stateAutoCalcProfiles.json' with { type: 'json' };
+
 // AAMVA DL/ID Card Design Standard 2025 — Jurisdiction Profiles
 // All 50 US states + DC with IIN codes and jurisdiction versions
 
@@ -17,7 +20,7 @@ export const EYE_COLORS = [
 export const HAIR_COLORS = [
   { value: 'BLK', label: 'Black' },
   { value: 'BRO', label: 'Brown' },
-  { value: 'BLD', label: 'Blonde' },
+  { value: 'BLN', label: 'Blonde' },
   { value: 'RED', label: 'Red/Auburn' },
   { value: 'GRY', label: 'Gray' },
   { value: 'WHI', label: 'White' },
@@ -69,7 +72,7 @@ export const STANDARD_FIELDS = {
 
   DDJ: { fieldId: 'DDJ', label: 'Under 21 Until', name: 'under21Until', type: 'date', required: false, displayFormat: 'MMDDYYYY', outputFormat: 'MMDDCCYY', validator: 'date', helpText: 'Date the cardholder turns 21 (MMDDYYYY)', row: 3 },
 
-  DDB: { fieldId: 'DDB', label: 'Card Revision Date', name: 'cardRevisionDate', type: 'date', required: false, displayFormat: 'MMDDYYYY', outputFormat: 'MMDDCCYY', validator: 'date', helpText: 'Card Revision Date (MMDDYYYY)', row: 3 },
+  DDB: { fieldId: 'DDB', label: 'Card Revision Date', name: 'cardRevisionDate', type: 'date', required: false, displayFormat: 'MMDDYYYY', outputFormat: 'MMDDCCYY', validator: 'date', helpText: 'Card revision date for the selected state profile.', row: 3, autoFill: 'stateRevision' },
 
   DCK: { fieldId: 'DCK', label: 'ICN', name: 'icn', type: 'text', required: false, maxLength: 25, helpText: 'Inventory Control Number', calculator: true, row: 3, jurisdictionSpecific: true },
   DCF: { fieldId: 'DCF', label: 'DD / Document Discriminator', name: 'dd', type: 'text', required: false, maxLength: 25, helpText: 'Document Discriminator', calculator: true, row: 3, jurisdictionSpecific: true },
@@ -78,21 +81,27 @@ export const STANDARD_FIELDS = {
 
   DCD: { fieldId: 'DCD', label: 'Endorsement', name: 'endorsement', type: 'text', required: false, maxLength: 5, helpText: 'Jurisdiction-specific endorsement codes', row: 4, jurisdictionSpecific: true },
 
+  DCE: { fieldId: 'DCE', label: 'Weight Range', name: 'weightRange', type: 'select', required: false, options: Array.from({ length: 10 }, (_, value) => ({ value: String(value), label: `${value} (${['up to 70 lb', '71-100 lb', '101-130 lb', '131-160 lb', '161-190 lb', '191-220 lb', '221-250 lb', '251-280 lb', '281-320 lb', '321+ lb'][value]})` })), helpText: 'ANSI D-20 weight range code based on the cardholder weight.', row: 4 },
+
   DAU: { fieldId: 'DAU', label: 'Height', name: 'height', type: 'number', required: false, unit: 'in', min: 36, max: 96, helpText: 'Height in inches (encoded with unit, e.g. 069 IN)', validator: 'height', row: 4 },
 
   DAW: { fieldId: 'DAW', label: 'Weight', name: 'weight', type: 'number', required: false, unit: 'lb', min: 50, max: 500, helpText: 'Weight in pounds (e.g. 169)', validator: 'weight', row: 4 },
 
   DAY: { fieldId: 'DAY', label: 'Eye Color', name: 'eyeColor', type: 'select', required: false, options: EYE_COLORS, helpText: 'Eye Color (ANSI D-20)', row: 4 },
   DAZ: { fieldId: 'DAZ', label: 'Hair Color', name: 'hairColor', type: 'select', required: false, options: HAIR_COLORS, helpText: 'Hair Color (ANSI D-20)', row: 4 },
-  DDE: { fieldId: 'DDE', label: 'Last Name Truncated', name: 'lastNameTruncated', type: 'select', required: false, options: [{ value: 'T', label: 'Truncated' }, { value: 'N', label: 'Not Truncated' }], helpText: 'Last name truncation indicator', row: 4 },
-  DDF: { fieldId: 'DDF', label: 'First Name Truncated', name: 'firstNameTruncated', type: 'select', required: false, options: [{ value: 'T', label: 'Truncated' }, { value: 'N', label: 'Not Truncated' }], helpText: 'First name truncation indicator', row: 4 },
-  DDG: { fieldId: 'DDG', label: 'Middle Name Truncated', name: 'middleNameTruncated', type: 'select', required: false, options: [{ value: 'T', label: 'Truncated' }, { value: 'N', label: 'Not Truncated' }], helpText: 'Middle name truncation indicator', row: 4 },
+  DCL: { fieldId: 'DCL', label: 'Race / Ethnicity', name: 'raceEthnicity', type: 'select', required: false, options: [{ value: 'AI', label: 'Alaskan or American Indian' }, { value: 'AP', label: 'Asian or Pacific Islander' }, { value: 'BK', label: 'Black' }, { value: 'H', label: 'Hispanic Origin' }, { value: 'O', label: 'Non-Hispanic' }, { value: 'U', label: 'Unknown' }, { value: 'W', label: 'White' }], helpText: 'Race/ethnicity code set defined by ANSI D-20.', row: 4 },
+  DDE: { fieldId: 'DDE', label: 'Last Name Truncated', name: 'lastNameTruncated', type: 'select', required: false, options: [{ value: 'T', label: 'Truncated' }, { value: 'N', label: 'Not Truncated' }, { value: 'U', label: 'Unknown' }], helpText: 'Last name truncation indicator', row: 4 },
+  DDF: { fieldId: 'DDF', label: 'First Name Truncated', name: 'firstNameTruncated', type: 'select', required: false, options: [{ value: 'T', label: 'Truncated' }, { value: 'N', label: 'Not Truncated' }, { value: 'U', label: 'Unknown' }], helpText: 'First name truncation indicator', row: 4 },
+  DDG: { fieldId: 'DDG', label: 'Middle Name Truncated', name: 'middleNameTruncated', type: 'select', required: false, options: [{ value: 'T', label: 'Truncated' }, { value: 'N', label: 'Not Truncated' }, { value: 'U', label: 'Unknown' }], helpText: 'Middle name truncation indicator', row: 4 },
 
   // ✦ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ✦
   // FIELD DDA: KUNCI UTAMA UNTUK STATUS "REAL ID"
   // ✦ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ✦
-  DCJ: { fieldId: 'DCJ', label: 'ICN / Inventory', name: 'dcj', type: 'text', required: false, maxLength: 25, helpText: 'Inventory control number (Hawaii)', row: 3 },
-  DDA: { fieldId: 'DDA', label: 'Real ID Compliance', name: 'complianceType', type: 'select', required: false, options: [{ value: 'F', label: 'Fully Compliant (Real ID)' }, { value: 'N', label: 'Non-Compliant' }], helpText: 'F = Real ID, N = Standard', row: 4 },
+  DCJ: { fieldId: 'DCJ', label: 'Audit Information', name: 'auditInfo', type: 'text', required: false, maxLength: 25, helpText: 'Jurisdiction-specific audit information.', row: 3 },
+  DDA: { fieldId: 'DDA', label: 'Real ID Compliance', name: 'complianceType', type: 'select', required: false, options: [{ value: 'F', label: 'Fully Compliant (Real ID)' }, { value: 'N', label: 'Non-Compliant' }], helpText: 'F = Real ID, N = Standard', row: 4, alwaysInclude: true },
+  DCI: { fieldId: 'DCI', label: 'Place of Birth', name: 'placeOfBirth', type: 'text', required: false, maxLength: 40, helpText: 'Place of birth, when encoded by the jurisdiction.', row: 3 },
+  DDD: { fieldId: 'DDD', label: 'Limited Term', name: 'limitedTerm', type: 'select', required: false, options: [{ value: 'NO', label: 'No' }, { value: 'YES', label: 'Yes' }], helpText: 'Indicates whether the document has a limited duration.', row: 4 },
+  DDM: { fieldId: 'DDM', label: 'Veteran Indicator', name: 'veteranIndicator', type: 'select', required: false, options: [{ value: 'NO', label: 'No' }, { value: 'YES', label: 'Yes' }], helpText: 'Veteran status when encoded by the jurisdiction.', row: 4 },
 };
 
 // Default field order for DL subfile (AAMVA standard ordering)
@@ -102,11 +111,17 @@ export const DEFAULT_FIELD_ORDER = [
   'DAG', 'DAH', 'DAI', 'DAJ', 'DAK', 'DCG',
   'DBB', 'DBD', 'DBA', 'DDB', 'DDJ',
   'DBC', 'DAU', 'DAW', 'DAY', 'DAZ',
-  'DCA', 'DCB', 'DCD',
-  'DCF', 'DCK', 'DCJ', 'DDK', 'DDA',
+  'DCE', 'DCL', 'DCA', 'DCB', 'DCD',
+  'DCF', 'DCK', 'DCI', 'DCJ', 'DDD', 'DDK', 'DDM', 'DDA',
 ];
 
 // Profile presets — configurable scanner/decoder profiles
+export const STATE_PAYLOAD_RULES = {
+  defaultValues: { DCB: 'NONE' },
+  HI: { defaultValues: { DDE: 'U', DDF: 'U', DDG: 'U' } },
+  MN: { forceInclude: { DAH: '' } },
+};
+
 export const PROFILES = {
   scandit: {
     key: 'scandit',
@@ -136,61 +151,69 @@ export const PROFILE_LIST = Object.values(PROFILES);
 
 // All 50 US states + DC with IIN and jurisdiction version data
 export const JURISDICTIONS = [
-  { name: 'Alabama', code: 'AL', iin: '636033', aamvaVersion: '10', jurisdictionVersion: '0403', revision: 'Rev. 01/01/2022 (0403)', includeZk: false },
-  { name: 'Alaska', code: 'AK', iin: '636059', aamvaVersion: '10', jurisdictionVersion: '0901', revision: 'Rev. 01/01/2021 (0901)', includeZk: false },
-  { name: 'Arizona', code: 'AZ', iin: '636026', aamvaVersion: '10', jurisdictionVersion: '1001', revision: 'Rev. 01/01/2023 (1001)', includeZk: false },
-  { name: 'Arkansas', code: 'AR', iin: '636021', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
-  { name: 'California', code: 'CA', iin: '636014', aamvaVersion: '10', jurisdictionVersion: '1001', revision: 'Rev. 01/01/2024 (1001)', includeZk: false },
-  { name: 'Colorado', code: 'CO', iin: '636020', aamvaVersion: '10', jurisdictionVersion: '1001', revision: 'Rev. 01/01/2022 (1001)', includeZk: false },
-  { name: 'Connecticut', code: 'CT', iin: '636006', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
-  { name: 'Delaware', code: 'DE', iin: '636011', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
-  { name: 'District of Columbia', code: 'DC', iin: '636043', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
-  { name: 'Florida', code: 'FL', iin: '636010', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
-  { name: 'Georgia', code: 'GA', iin: '636055', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
+  { name: 'Alabama', code: 'AL', iin: '636033', aamvaVersion: '10', jurisdictionVersion: '04', revision: 'Rev. 01/01/2022 (0403)', includeZk: false },
+  { name: 'Alaska', code: 'AK', iin: '636059', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2021 (0901)', includeZk: false },
+  { name: 'Arizona', code: 'AZ', iin: '636026', aamvaVersion: '10', jurisdictionVersion: '10', revision: 'Rev. 01/01/2023 (1001)', includeZk: false },
+  { name: 'Arkansas', code: 'AR', iin: '636021', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
+  { name: 'California', code: 'CA', iin: '636014', aamvaVersion: '10', jurisdictionVersion: '10', revision: 'Rev. 01/01/2024 (1001)', includeZk: false },
+  { name: 'Colorado', code: 'CO', iin: '636020', aamvaVersion: '10', jurisdictionVersion: '10', revision: 'Rev. 01/01/2022 (1001)', includeZk: false },
+  { name: 'Connecticut', code: 'CT', iin: '636006', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
+  { name: 'Delaware', code: 'DE', iin: '636011', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
+  { name: 'District of Columbia', code: 'DC', iin: '636043', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
+  { name: 'Florida', code: 'FL', iin: '636010', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
+  { name: 'Georgia', code: 'GA', iin: '636055', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
   { name: 'Hawaii', code: 'HI', iin: '636047', aamvaVersion: '04', jurisdictionVersion: '00', revision: 'Rev. 01/01/2020 (0400)', includeZk: false },
-  { name: 'Idaho', code: 'ID', iin: '636050', aamvaVersion: '10', jurisdictionVersion: '1009', revision: 'Rev. 01/01/2023 (1009)', includeZk: false },
-  { name: 'Illinois', code: 'IL', iin: '636035', aamvaVersion: '10', jurisdictionVersion: '0800', revision: 'Rev. 01/01/2016 (0800)', includeZk: false },
-  { name: 'Indiana', code: 'IN', iin: '636037', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
-  { name: 'Iowa', code: 'IA', iin: '636018', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2017 (0900)', includeZk: false },
-  { name: 'Kansas', code: 'KS', iin: '636022', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
-  { name: 'Kentucky', code: 'KY', iin: '636046', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2018 (0900)', includeZk: false },
-  { name: 'Louisiana', code: 'LA', iin: '636007', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
-  { name: 'Maine', code: 'ME', iin: '636041', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
-  { name: 'Maryland', code: 'MD', iin: '636003', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2021 (0900)', includeZk: false },
-  { name: 'Massachusetts', code: 'MA', iin: '636002', aamvaVersion: '10', jurisdictionVersion: '0800', revision: 'Rev. 01/01/2016 (0800)', includeZk: false },
-  { name: 'Michigan', code: 'MI', iin: '636032', aamvaVersion: '10', jurisdictionVersion: '0800', revision: 'Rev. 01/01/2020 (0800)', includeZk: false },
+  { name: 'Idaho', code: 'ID', iin: '636050', aamvaVersion: '10', jurisdictionVersion: '10', revision: 'Rev. 01/01/2023 (1009)', includeZk: false },
+  { name: 'Illinois', code: 'IL', iin: '636035', aamvaVersion: '10', jurisdictionVersion: '08', revision: 'Rev. 01/01/2016 (0800)', includeZk: false },
+  { name: 'Indiana', code: 'IN', iin: '636037', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
+  { name: 'Iowa', code: 'IA', iin: '636018', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2017 (0900)', includeZk: false },
+  { name: 'Kansas', code: 'KS', iin: '636022', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
+  { name: 'Kentucky', code: 'KY', iin: '636046', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2018 (0900)', includeZk: false },
+  { name: 'Louisiana', code: 'LA', iin: '636007', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
+  { name: 'Maine', code: 'ME', iin: '636041', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
+  { name: 'Maryland', code: 'MD', iin: '636003', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2021 (0900)', includeZk: false },
+  { name: 'Massachusetts', code: 'MA', iin: '636002', aamvaVersion: '10', jurisdictionVersion: '08', revision: 'Rev. 01/01/2016 (0800)', includeZk: false },
+  { name: 'Michigan', code: 'MI', iin: '636032', aamvaVersion: '10', jurisdictionVersion: '08', revision: 'Rev. 01/01/2020 (0800)', includeZk: false },
   { name: 'Minnesota', code: 'MN', iin: '636038', aamvaVersion: '09', jurisdictionVersion: '00', revision: 'Rev. 10/23/2017 (0900)', includeZk: false, extraSubfiles: [{ type: 'ZM', rawFormat: 'mn-verified' }] },
-  { name: 'Mississippi', code: 'MS', iin: '636051', aamvaVersion: '10', jurisdictionVersion: '1000', revision: 'Rev. 01/01/2023 (1000)', includeZk: false },
-  { name: 'Missouri', code: 'MO', iin: '636030', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
-  { name: 'Montana', code: 'MT', iin: '636008', aamvaVersion: '10', jurisdictionVersion: '0800', revision: 'Rev. 01/01/2016 (0800)', includeZk: false },
-  { name: 'Nebraska', code: 'NE', iin: '636054', aamvaVersion: '10', jurisdictionVersion: '1000', revision: 'Rev. 01/01/2021 (1000)', includeZk: false },
-  { name: 'Nevada', code: 'NV', iin: '636049', aamvaVersion: '10', jurisdictionVersion: '1000', revision: 'Rev. 05/24/2021 (1000)', includeZk: false },
-  { name: 'New Hampshire', code: 'NH', iin: '636039', aamvaVersion: '10', jurisdictionVersion: '1000', revision: 'Rev. 01/01/2024 (1000)', includeZk: false },
-  { name: 'New Jersey', code: 'NJ', iin: '636036', aamvaVersion: '10', jurisdictionVersion: '0402', revision: 'Rev. 01/01/2020 (0402)', includeZk: false },
-  { name: 'New Mexico', code: 'NM', iin: '636009', aamvaVersion: '10', jurisdictionVersion: '0800', revision: 'Rev. 01/01/2016 (0800)', includeZk: false },
-  { name: 'New York', code: 'NY', iin: '636001', aamvaVersion: '10', jurisdictionVersion: '1004', revision: 'Rev. 01/01/2022 (1004)', includeZk: false },
-  { name: 'North Carolina', code: 'NC', iin: '636004', aamvaVersion: '10', jurisdictionVersion: '0800', revision: 'Rev. 01/01/2016 (0800)', includeZk: false },
-  { name: 'North Dakota', code: 'ND', iin: '636034', aamvaVersion: '10', jurisdictionVersion: '1000', revision: 'Rev. 01/01/2023 (1000)', includeZk: false },
-  { name: 'Ohio', code: 'OH', iin: '636023', aamvaVersion: '10', jurisdictionVersion: '0901', revision: 'Rev. 01/01/2020 (0901)', includeZk: false },
-  { name: 'Oklahoma', code: 'OK', iin: '636058', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
-  { name: 'Oregon', code: 'OR', iin: '636029', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
-  { name: 'Pennsylvania', code: 'PA', iin: '636025', aamvaVersion: '10', jurisdictionVersion: '1000', revision: 'Rev. 01/01/2022 (1000)', includeZk: false },
-  { name: 'Rhode Island', code: 'RI', iin: '636052', aamvaVersion: '10', jurisdictionVersion: '0801', revision: 'Rev. 01/01/2022 (0801)', includeZk: false },
-  { name: 'South Carolina', code: 'SC', iin: '636005', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
-  { name: 'South Dakota', code: 'SD', iin: '636042', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
-  { name: 'Tennessee', code: 'TN', iin: '636053', aamvaVersion: '10', jurisdictionVersion: '0600', revision: 'Rev. 01/01/2017 (0600)', includeZk: false },
-  { name: 'Texas', code: 'TX', iin: '636015', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2022 (0900)', includeZk: false },
-  { name: 'Utah', code: 'UT', iin: '636040', aamvaVersion: '10', jurisdictionVersion: '1000', revision: 'Rev. 01/01/2021 (1000)', includeZk: false },
-  { name: 'Vermont', code: 'VT', iin: '636024', aamvaVersion: '10', jurisdictionVersion: '0902', revision: 'Rev. 01/01/2020 (0902)', includeZk: false },
-  { name: 'Virginia', code: 'VA', iin: '636000', aamvaVersion: '10', jurisdictionVersion: '0300', revision: 'Rev. 01/01/2018 (0300)', includeZk: false },
-  { name: 'Washington', code: 'WA', iin: '636045', aamvaVersion: '10', jurisdictionVersion: '0901', revision: 'Rev. 01/01/2025 (0901)', includeZk: false },
-  { name: 'West Virginia', code: 'WV', iin: '636061', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
-  { name: 'Wisconsin', code: 'WI', iin: '636031', aamvaVersion: '10', jurisdictionVersion: '1002', revision: 'Rev. 01/01/2023 (1002)', includeZk: false },
-  { name: 'Wyoming', code: 'WY', iin: '636060', aamvaVersion: '10', jurisdictionVersion: '0900', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
+  { name: 'Mississippi', code: 'MS', iin: '636051', aamvaVersion: '10', jurisdictionVersion: '10', revision: 'Rev. 01/01/2023 (1000)', includeZk: false },
+  { name: 'Missouri', code: 'MO', iin: '636030', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
+  { name: 'Montana', code: 'MT', iin: '636008', aamvaVersion: '10', jurisdictionVersion: '08', revision: 'Rev. 01/01/2016 (0800)', includeZk: false },
+  { name: 'Nebraska', code: 'NE', iin: '636054', aamvaVersion: '10', jurisdictionVersion: '10', revision: 'Rev. 01/01/2021 (1000)', includeZk: false },
+  { name: 'Nevada', code: 'NV', iin: '636049', aamvaVersion: '10', jurisdictionVersion: '10', revision: 'Rev. 05/24/2021 (1000)', includeZk: false },
+  { name: 'New Hampshire', code: 'NH', iin: '636039', aamvaVersion: '10', jurisdictionVersion: '10', revision: 'Rev. 01/01/2024 (1000)', includeZk: false },
+  { name: 'New Jersey', code: 'NJ', iin: '636036', aamvaVersion: '10', jurisdictionVersion: '04', revision: 'Rev. 01/01/2020 (0402)', includeZk: false },
+  { name: 'New Mexico', code: 'NM', iin: '636009', aamvaVersion: '10', jurisdictionVersion: '08', revision: 'Rev. 01/01/2016 (0800)', includeZk: false },
+  { name: 'New York', code: 'NY', iin: '636001', aamvaVersion: '10', jurisdictionVersion: '10', revision: 'Rev. 01/01/2022 (1004)', includeZk: false },
+  { name: 'North Carolina', code: 'NC', iin: '636004', aamvaVersion: '10', jurisdictionVersion: '08', revision: 'Rev. 01/01/2016 (0800)', includeZk: false },
+  { name: 'North Dakota', code: 'ND', iin: '636034', aamvaVersion: '10', jurisdictionVersion: '10', revision: 'Rev. 01/01/2023 (1000)', includeZk: false },
+  { name: 'Ohio', code: 'OH', iin: '636023', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2020 (0901)', includeZk: false },
+  { name: 'Oklahoma', code: 'OK', iin: '636058', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
+  { name: 'Oregon', code: 'OR', iin: '636029', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
+  { name: 'Pennsylvania', code: 'PA', iin: '636025', aamvaVersion: '10', jurisdictionVersion: '10', revision: 'Rev. 01/01/2022 (1000)', includeZk: false },
+  { name: 'Rhode Island', code: 'RI', iin: '636052', aamvaVersion: '10', jurisdictionVersion: '08', revision: 'Rev. 01/01/2022 (0801)', includeZk: false },
+  { name: 'South Carolina', code: 'SC', iin: '636005', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
+  { name: 'South Dakota', code: 'SD', iin: '636042', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
+  { name: 'Tennessee', code: 'TN', iin: '636053', aamvaVersion: '10', jurisdictionVersion: '06', revision: 'Rev. 01/01/2017 (0600)', includeZk: false },
+  { name: 'Texas', code: 'TX', iin: '636015', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2022 (0900)', includeZk: false },
+  { name: 'Utah', code: 'UT', iin: '636040', aamvaVersion: '10', jurisdictionVersion: '10', revision: 'Rev. 01/01/2021 (1000)', includeZk: false },
+  { name: 'Vermont', code: 'VT', iin: '636024', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2020 (0902)', includeZk: false },
+  { name: 'Virginia', code: 'VA', iin: '636000', aamvaVersion: '10', jurisdictionVersion: '03', revision: 'Rev. 01/01/2018 (0300)', includeZk: false },
+  { name: 'Washington', code: 'WA', iin: '636045', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2025 (0901)', includeZk: false },
+  { name: 'West Virginia', code: 'WV', iin: '636061', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
+  { name: 'Wisconsin', code: 'WI', iin: '636031', aamvaVersion: '10', jurisdictionVersion: '10', revision: 'Rev. 01/01/2023 (1002)', includeZk: false },
+  { name: 'Wyoming', code: 'WY', iin: '636060', aamvaVersion: '10', jurisdictionVersion: '09', revision: 'Rev. 01/01/2020 (0900)', includeZk: false },
 ];
 
 export function getJurisdiction(code) {
   return JURISDICTIONS.find(j => j.code === code) || JURISDICTIONS.find(j => j.code === 'NV');
+}
+
+export function getStateProfile(code) {
+  return STATE_PROFILES[code] || null;
+}
+
+export function getStateAutoCalcRules(code) {
+  return STATE_AUTO_CALC[code]?.fields || {};
 }
 
 export function getFieldDef(fieldId) {
@@ -1342,12 +1365,145 @@ export function getFields(jurisdictionCode, profileKey) {
   const jur = getJurisdiction(jurisdictionCode);
   const profile = PROFILES[profileKey] || PROFILES.scandit;
   const stateCfg = STATE_FIELDS[jur.code] || null;
+  const stateProfile = getStateProfile(jur.code);
+  const autoCalcRules = getStateAutoCalcRules(jur.code);
+  if (stateProfile?.fields?.length) {
+    const sourceFields = stateProfile.fields.map((sourceField) => {
+      const definition = sourceField.fieldId ? STANDARD_FIELDS[sourceField.fieldId] : null;
+      const fieldId = definition?.fieldId || sourceField.sourceName;
+      const stateInfo = definition && stateCfg ? stateCfg[definition.fieldId] : null;
+      const autoCalcRule = definition ? autoCalcRules[definition.fieldId] : null;
+      const sourceOptions = sourceField.options.map((option) => {
+        let value = option.value;
+        if (definition?.fieldId === 'DBC') {
+          if (/^(m|male)$/i.test(value)) value = '1';
+          if (/^(f|female)$/i.test(value)) value = '2';
+        } else if (definition?.fieldId === 'DDK') {
+          if (/^yes$/i.test(value)) value = '1';
+          if (/^no$/i.test(value)) value = '0';
+        } else if (definition?.fieldId === 'DDA') {
+          if (/^(yes|true|y)$/i.test(value)) value = 'F';
+          if (/^(no|false|n)$/i.test(value)) value = 'N';
+        }
+        return { ...option, value };
+      });
+      const options = sourceOptions.length ? sourceOptions : (definition?.options || []);
+      const revisionOptions = options.filter((option) => option.value !== '');
+      const autoFillValue = definition?.fieldId === 'DDB'
+        ? options.find((option) => option.value.replace(/[^0-9]/g, '') === stateProfile.cardRevisionDate)?.value
+          || stateProfile.cardRevisionDate
+          || revisionOptions[revisionOptions.length - 1]?.value
+        : undefined;
+      const helpText = [
+        sourceField.tooltip,
+        stateInfo?.tooltip,
+        autoCalcRule?.tooltip,
+        definition?.helpText,
+      ].filter((text, index, texts) => text && texts.indexOf(text) === index).join(' ')
+        || `Enter ${sourceField.label} as shown on the card.`;
+      const calculator = definition
+        ? Boolean(autoCalcRule?.calcOnclick || definition.autoFill || sourceOptions.length || definition.calculator || ['DCS', 'DAC', 'DAD', 'DAG', 'DAI', 'DAK', 'DBB', 'DBD', 'DBA', 'DCE', 'DCL', 'DAU', 'DAW', 'DDE', 'DDF', 'DDG', 'DDD', 'DDK', 'DDM'].includes(definition.fieldId))
+        : Boolean(sourceOptions.length || sourceField.placeholder || sourceField.pattern);
+
+      return {
+        ...definition,
+        fieldId,
+        aamvaFieldId: definition?.fieldId || null,
+        sourceName: sourceField.sourceName,
+        name: definition?.name || `source_${jur.code}_${sourceField.sourceName}`,
+        label: sourceField.label || definition?.label || sourceField.sourceName,
+        type: definition?.type === 'select' ? 'select' : sourceField.type,
+        required: definition ? sourceField.required : false,
+        maxLength: sourceField.maxLength || Number(autoCalcRule?.maxLength) || definition?.maxLength,
+        placeholder: autoCalcRule?.placeholder || sourceField.placeholder,
+        pattern: autoCalcRule?.pattern || sourceField.pattern,
+        options,
+        calculator,
+        autoFillValue,
+        autoCalcRule,
+        onKeyup: autoCalcRule?.onKeyup || '',
+        helpText,
+        autoFill: definition?.fieldId === 'DDB' ? 'stateRevision' : definition?.autoFill,
+        notEncoded: !definition,
+      };
+    });
+    for (const [fieldId, stateInfo] of Object.entries(stateCfg || {})) {
+      if (sourceFields.some((field) => field.aamvaFieldId === fieldId)) continue;
+      const definition = STANDARD_FIELDS[fieldId];
+      if (!definition) continue;
+      const autoCalcRule = autoCalcRules[fieldId];
+      sourceFields.push({
+        ...definition,
+        fieldId,
+        aamvaFieldId: fieldId,
+        sourceName: fieldId,
+        required: stateInfo.required,
+        options: definition.options || [],
+        calculator: Boolean(autoCalcRule?.calcOnclick || definition.calculator || definition.options?.length),
+        placeholder: autoCalcRule?.placeholder || definition.placeholder,
+        pattern: autoCalcRule?.pattern || definition.pattern,
+        autoCalcRule,
+        onKeyup: autoCalcRule?.onKeyup || '',
+        helpText: [stateInfo.tooltip, autoCalcRule?.tooltip, definition.helpText]
+          .filter((text, index, texts) => text && texts.indexOf(text) === index)
+          .join(' ') || `Enter ${definition.label} as shown on the card.`,
+      });
+    }
+    for (const [fieldId, autoCalcRule] of Object.entries(autoCalcRules)) {
+      if (sourceFields.some((field) => field.aamvaFieldId === fieldId)) continue;
+      const definition = STANDARD_FIELDS[fieldId];
+      if (!definition) continue;
+      sourceFields.push({
+        ...definition,
+        aamvaFieldId: fieldId,
+        sourceName: fieldId,
+        pattern: autoCalcRule.pattern || '',
+        placeholder: autoCalcRule.placeholder || '',
+        maxLength: Number(autoCalcRule.maxLength) || definition.maxLength,
+        calculator: Boolean(autoCalcRule.calcOnclick || definition.calculator || definition.options?.length),
+        autoCalcRule,
+        onKeyup: autoCalcRule.onKeyup || '',
+        helpText: [autoCalcRule.tooltip, definition.helpText]
+          .filter((text, index, texts) => text && texts.indexOf(text) === index)
+          .join(' '),
+      });
+    }
+    const sourceByFieldId = new Map(
+      sourceFields.filter((field) => field.aamvaFieldId).map((field) => [field.aamvaFieldId, field])
+    );
+    const fields = DEFAULT_FIELD_ORDER
+      .filter((fieldId) => sourceByFieldId.has(fieldId))
+      .map((fieldId) => sourceByFieldId.get(fieldId));
+    fields.push(...sourceFields.filter(
+      (field) => field.aamvaFieldId && !DEFAULT_FIELD_ORDER.includes(field.aamvaFieldId)
+    ));
+    fields.push(...sourceFields.filter((field) => !field.aamvaFieldId));
+
+    for (const fieldId of ['DAJ', 'DCG', 'DDB', 'DDA', 'DCE']) {
+      if (sourceByFieldId.has(fieldId)) continue;
+      const definition = STANDARD_FIELDS[fieldId];
+      fields.push({
+        ...definition,
+        aamvaFieldId: fieldId,
+        required: false,
+        helpText: fieldId === 'DDA'
+          ? stateProfile.realIdTooltip || definition.helpText
+          : fieldId === 'DDB' && !stateProfile.cardRevisionDate
+            ? 'This state profile does not provide a card revision date; enter one only if it appears on the card.'
+            : definition.helpText,
+        calculator: true,
+        autoFillValue: fieldId === 'DDB' ? stateProfile.cardRevisionDate || '' : undefined,
+      });
+    }
+    return { fields, jurisdiction: jur, profile };
+  }
+
   const fields = [];
   for (const fieldId of DEFAULT_FIELD_ORDER) {
     const def = STANDARD_FIELDS[fieldId];
     if (!def) continue;
     // If we have state-specific config, only include fields that state uses
-    if (stateCfg && !stateCfg[fieldId]) continue;
+    if (stateCfg && !stateCfg[fieldId] && !def.autoFill && !def.alwaysInclude) continue;
     const stateInfo = stateCfg ? stateCfg[fieldId] : null;
     const isRequired = stateInfo ? stateInfo.required : profile.requiredFields.includes(fieldId);
     const tooltip = stateInfo && stateInfo.tooltip ? stateInfo.tooltip : def.helpText;
@@ -1666,6 +1822,246 @@ export const STATE_PATTERNS = {
   },
 };
 
+function randomItem(items) {
+  return items[Math.floor(Math.random() * items.length)];
+}
+
+function generateRegexSample(pattern, minimumLength = 0) {
+  let position = 0;
+
+  const parseAlternation = () => {
+    const branches = [];
+    let current = '';
+
+    while (position < pattern.length) {
+      const character = pattern[position];
+      if (character === ')') break;
+      if (character === '|') {
+        branches.push(current);
+        current = '';
+        position += 1;
+        continue;
+      }
+      current += parseTerm();
+    }
+
+    branches.push(current);
+    return randomItem(branches);
+  };
+
+  const parseCharacterClass = () => {
+    position += 1;
+    const negated = pattern[position] === '^';
+    if (negated) position += 1;
+    const tokens = [];
+
+    while (position < pattern.length && pattern[position] !== ']') {
+      let token = pattern[position++];
+      if (token === '\\' && position < pattern.length) {
+        const escaped = pattern[position++];
+        token = escaped === 'd' ? '0123456789'
+          : escaped === 'w' ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_'
+            : escaped === 's' ? ' \t\r\n'
+              : escaped;
+      }
+      tokens.push(token);
+    }
+    if (pattern[position] === ']') position += 1;
+
+    const allowed = [];
+    for (let index = 0; index < tokens.length; index += 1) {
+      const start = tokens[index];
+      if (
+        start.length === 1
+        && tokens[index + 1] === '-'
+        && tokens[index + 2]?.length === 1
+      ) {
+        const end = tokens[index + 2].charCodeAt(0);
+        for (let code = start.charCodeAt(0); code <= end; code += 1) {
+          allowed.push(String.fromCharCode(code));
+        }
+        index += 2;
+      } else {
+        allowed.push(...start);
+      }
+    }
+
+    if (!negated) return randomItem(allowed.length ? allowed : ['A']);
+    const candidates = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const excluded = new Set(allowed);
+    return randomItem([...candidates].filter((character) => !excluded.has(character)));
+  };
+
+  const parseAtom = () => {
+    const character = pattern[position++];
+    if (character === '(') {
+      if (pattern.slice(position, position + 2) === '?:') position += 2;
+      const group = parseAlternation();
+      if (pattern[position] === ')') position += 1;
+      return group;
+    }
+    if (character === '[') {
+      position -= 1;
+      return parseCharacterClass();
+    }
+    if (character === '\\' && position < pattern.length) {
+      const escaped = pattern[position++];
+      if (escaped === 'd') return randomItem('0123456789');
+      if (escaped === 'D') return randomItem('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
+      if (escaped === 'w') return randomItem('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_');
+      if (escaped === 'W') return randomItem('- _.');
+      if (escaped === 's') return ' ';
+      if (escaped === 'S') return randomItem('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
+      return escaped;
+    }
+    if (character === '^' || character === '$') return '';
+    if (character === '.') return randomItem('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
+    return character;
+  };
+
+  const parseTerm = () => {
+    let sample = parseAtom();
+    if (position >= pattern.length) return sample;
+
+    let minimum = 1;
+    let maximum = 1;
+    const quantifier = pattern[position];
+    if (quantifier === '*') {
+      minimum = 0;
+      maximum = Math.max(3, minimumLength);
+      position += 1;
+    } else if (quantifier === '+') {
+      maximum = Math.max(3, minimumLength);
+      position += 1;
+    } else if (quantifier === '?') {
+      minimum = 0;
+      position += 1;
+    } else if (quantifier === '{') {
+      const bounds = pattern.slice(position).match(/^\{(\d+)(?:,(\d*))?\}/);
+      if (bounds) {
+        minimum = Number(bounds[1]);
+        maximum = bounds[2] === undefined
+          ? minimum
+          : bounds[2] === ''
+            ? Math.max(minimum + 2, minimumLength)
+            : Number(bounds[2]);
+        maximum = Math.max(minimum, Math.min(maximum, minimum + 4, 40));
+        position += bounds[0].length;
+      }
+    }
+    if (pattern[position] === '?') position += 1;
+
+    const count = minimum + Math.floor(Math.random() * (maximum - minimum + 1));
+    return sample.repeat(count);
+  };
+
+  try {
+    const sample = parseAlternation();
+    const matcher = new RegExp(`^(?:${pattern})$`);
+    return matcher.test(sample) ? sample : '';
+  } catch {
+    return '';
+  }
+}
+
+function patternMatches(value, rule) {
+  if (!rule?.pattern) return true;
+  try {
+    return new RegExp(`^(?:${rule.pattern})$`).test(value);
+  } catch {
+    return false;
+  }
+}
+
+function randomizePlaceholder(placeholder) {
+  return [...placeholder].map((character) => {
+    if (/[0-9]/.test(character)) return randomItem('0123456789');
+    if (/[A-Z]/.test(character)) return randomItem('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    if (/[a-z]/.test(character)) return randomItem('abcdefghijklmnopqrstuvwxyz');
+    return character;
+  }).join('');
+}
+
+function generateRuleValue(rule) {
+  if (!rule) return '';
+  const declaredMinimum = Number(rule.minLength) || 0;
+  const placeholderMatches = rule.placeholder && patternMatches(rule.placeholder, rule);
+  const minimumLength = placeholderMatches && rule.placeholder.length < declaredMinimum
+    ? rule.placeholder.length
+    : declaredMinimum;
+  const maximumLength = Number(rule.maxLength) || 40;
+  const meetsLength = (value) =>
+    value.length >= minimumLength && value.length <= maximumLength;
+  if (!rule.pattern) {
+    const value = rule.placeholder ? randomizePlaceholder(rule.placeholder) : '';
+    return meetsLength(value) ? value : '';
+  }
+  for (let attempt = 0; attempt < 40; attempt += 1) {
+    const sample = generateRegexSample(rule.pattern, minimumLength);
+    if (sample && meetsLength(sample) && patternMatches(sample, rule)) return sample;
+  }
+  if (rule.placeholder && meetsLength(rule.placeholder) && patternMatches(rule.placeholder, rule)) {
+    const sample = randomizePlaceholder(rule.placeholder);
+    if (meetsLength(sample) && patternMatches(sample, rule)) return sample;
+  }
+  return '';
+}
+
+function formatDateParts(year, month, day) {
+  const lastDay = new Date(Date.UTC(year, month, 0)).getUTCDate();
+  return `${String(month).padStart(2, '0')}${String(Math.min(day, lastDay)).padStart(2, '0')}${year}`;
+}
+
+function randomIssueDate(rule) {
+  const currentYear = new Date().getFullYear();
+  const range = rule?.calcOnclick?.match(/makeRandomDOI\(\s*(\d{4})(?:\s*,\s*(\d{4}))?/i);
+  let start = range ? new Date(Date.UTC(Number(range[1]), 0, 1)) : new Date(Date.UTC(currentYear - 2, 0, 1));
+  let end = range?.[2] ? new Date(Date.UTC(Number(range[2]), 11, 31)) : new Date();
+  const tooltipStart = rule?.tooltip?.match(/valid issue period is\s+(\d{1,2})\/(\d{1,2})\/(\d{4})/i);
+  if (tooltipStart) {
+    const fromTooltip = new Date(Date.UTC(Number(tooltipStart[3]), Number(tooltipStart[1]) - 1, Number(tooltipStart[2])));
+    if (fromTooltip > start) start = fromTooltip;
+  }
+  if (end > new Date()) end = new Date();
+  if (start > end) start = new Date(Date.UTC(currentYear, 0, 1));
+
+  for (let attempt = 0; attempt < 60; attempt += 1) {
+    const date = new Date(start.getTime() + Math.random() * Math.max(1, end.getTime() - start.getTime()));
+    const value = formatDateParts(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate());
+    if (patternMatches(value, rule)) return value;
+  }
+  return generateRuleValue(rule);
+}
+
+function expiryYears(rule, issueRule) {
+  const source = issueRule?.onKeyup?.match(/(?:makeDOEfromDOI(?:_full)?|makeRandomDOE(?:_AL)?|calculate_DOE)\(\s*(\d+)/i)
+    || rule?.calcOnclick?.match(/(?:makeDOEfromDOI(?:_full)?|makeRandomDOE(?:_AL)?|calculate_DOE)\(\s*(\d+)/i)
+    || rule?.tooltip?.match(/(\d+)\s+years? after/i);
+  return source ? Number(source[1]) : 4;
+}
+
+function calculateExpiryDate(rule, issueRule, data) {
+  const years = expiryYears(rule, issueRule);
+  const issue = String(data.issueDate || '').replace(/\D/g, '');
+  const birth = String(data.birthDate || '').replace(/\D/g, '');
+  const now = new Date();
+  const issueYear = issue.length === 8 ? Number(issue.slice(4)) : now.getFullYear();
+  const sameAsBirth = /month and day.{0,20}birth date/i.test(rule?.tooltip || '');
+  const month = sameAsBirth && birth.length === 8
+    ? Number(birth.slice(0, 2))
+    : issue.length === 8
+      ? Number(issue.slice(0, 2))
+      : now.getMonth() + 1;
+  let day = sameAsBirth && birth.length === 8
+    ? Number(birth.slice(2, 4))
+    : issue.length === 8
+      ? Number(issue.slice(2, 4))
+      : now.getDate();
+  if (/month and day\s*\+\s*1/i.test(rule?.tooltip || '')) day += 1;
+  const candidate = formatDateParts(issueYear + years, month, day);
+  return patternMatches(candidate, rule) ? candidate : generateRuleValue(rule);
+}
+
 function generateFromStatePattern(fieldId, jurisdictionCode) {
   const pat = STATE_PATTERNS[jurisdictionCode]?.[fieldId];
   if (pat?.placeholder) return pat.placeholder;
@@ -1674,8 +2070,28 @@ function generateFromStatePattern(fieldId, jurisdictionCode) {
 
 export function generateTestValue(fieldId, jurisdictionCode, data = {}) {
   const jur = getJurisdiction(jurisdictionCode);
+  const stateProfile = getStateProfile(jur?.code);
+  const stateRules = getStateAutoCalcRules(jur?.code);
+  const stateField = stateProfile?.fields?.find((field) => field.fieldId === fieldId);
+  const autoCalcRule = stateRules[fieldId] || stateField;
 
-  // Prefer state-specific pattern if available
+  if (fieldId === 'DBD' && stateRules.DBD) {
+    return randomIssueDate(stateRules.DBD);
+  }
+  if (fieldId === 'DBA' && stateRules.DBA) {
+    return calculateExpiryDate(stateRules.DBA, stateRules.DBD, data);
+  }
+  if (autoCalcRule?.pattern || autoCalcRule?.placeholder) {
+    const generated = generateRuleValue(autoCalcRule);
+    if (generated) return generated;
+  }
+
+  // Use source-profile patterns before older hardcoded examples.
+  if (stateField?.pattern || stateField?.placeholder) {
+    const generated = generateRuleValue(stateField);
+    if (generated) return generated;
+  }
+
   const fromPattern = generateFromStatePattern(fieldId, jur?.code);
   if (fromPattern) return fromPattern;
 
@@ -1756,7 +2172,20 @@ export function generateTestValue(fieldId, jurisdictionCode, data = {}) {
       return randomHeight.padStart(3, '0') + ' in';
     }
     case 'DAW': return String(Math.floor(Math.random() * 150 + 100)); // 100-250 lbs
-    case 'DDB': return data.issueDate || '';
+    case 'DDB': {
+      if (!stateProfile) return '';
+      const revisionOptions = (stateProfile.fields.find((field) => field.fieldId === 'DDB')?.options || [])
+        .filter((option) => option.value !== '');
+      return revisionOptions.find(
+        (option) => option.value.replace(/[^0-9]/g, '') === stateProfile.cardRevisionDate
+      )?.value || stateProfile.cardRevisionDate || revisionOptions[revisionOptions.length - 1]?.value || '';
+    }
+    case 'DCE': {
+      const weight = Number(String(data.weight || '').replace(/[^0-9]/g, ''));
+      if (!Number.isFinite(weight) || weight <= 0) return String(Math.floor(Math.random() * 10));
+      if (weight <= 70) return '0';
+      return String(Math.min(9, Math.ceil((weight - 70) / 30)));
+    }
     case 'DDJ': {
       const birthDate = String(data.birthDate || '').replace(/[^0-9]/g, '');
       if (birthDate.length !== 8) return '';
@@ -1767,9 +2196,9 @@ export function generateTestValue(fieldId, jurisdictionCode, data = {}) {
       return `${String(turns21.getUTCMonth() + 1).padStart(2, '0')}${String(turns21.getUTCDate()).padStart(2, '0')}${turns21.getUTCFullYear()}`;
     }
     case 'DAY': return rand(['BLK','BRO','BLU','GRN','GRY','HAZ']);
-    case 'DAZ': return rand(['BLK','BRO','BLD','RED','GRY']);
+    case 'DAZ': return rand(['BLK','BRO','BLN','RED','GRY']);
     case 'DCA': return rand(['A','B','C','D']);
-    case 'DCB': return rand(['A','B','CORR LENSES','']);
+    case 'DCB': return 'NONE';
     case 'DCD': return rand(['H','M','N','']);
     case 'DDK': return '0';
     case 'DDE': return 'N';

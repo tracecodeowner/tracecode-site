@@ -1,8 +1,8 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/lib/AuthContext';
 import { base44 } from '@/api/base44Client';
-import { getJurisdiction, getFields, getHeaderDisplay, validateForm } from '@/lib/aamva';
+import { getJurisdiction, getFields, getHeaderDisplay } from '@/lib/aamva';
 import { generateBarcodeDataURL, downloadBarcodePNG } from '@/lib/pdf417';
 import { generateTestValue } from '@/lib/aamva';
 import JurisdictionSelector from '@/components/aamva/JurisdictionSelector';
@@ -23,6 +23,7 @@ export default function Home() {
   const [generating, setGenerating] = useState(false);
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
   const [showTopUp, setShowTopUp] = useState(false);
+  const lastAutoRevision = useRef(null);
 
   const jur = useMemo(() => getJurisdiction(jurisdiction), [jurisdiction]);
   const { fields } = useMemo(() => getFields(jurisdiction, profile), [jurisdiction, profile]);
@@ -39,8 +40,18 @@ export default function Home() {
   }, [fields]);
 
   useEffect(() => {
-    setFormData((prev) => ({ ...prev, state: jurisdiction, country: 'USA' }));
-  }, [jurisdiction]);
+    const revisionField = fields.find((field) => field.aamvaFieldId === 'DDB');
+    const revisionValue = revisionField?.autoFillValue || '';
+    setFormData((prev) => {
+      const next = { ...prev, state: jurisdiction, country: 'USA' };
+      const currentRevision = revisionField ? prev[revisionField.name] : undefined;
+      if (revisionField && (!currentRevision || currentRevision === lastAutoRevision.current)) {
+        next[revisionField.name] = revisionValue;
+      }
+      return next;
+    });
+    lastAutoRevision.current = revisionValue;
+  }, [jurisdiction, fields]);
 
   // Initialize user profile (generate API key + referral code) on first load
   useEffect(() => {
@@ -62,6 +73,10 @@ export default function Home() {
     for (const field of fields) {
       if (field.autoFill === 'jurisdiction') { filled[field.name] = jurisdiction; continue; }
       if (field.autoFill === 'country') { filled[field.name] = 'USA'; continue; }
+      if (field.autoFill === 'stateRevision') {
+        filled[field.name] = field.autoFillValue || '';
+        continue;
+      }
       const val = generateTestValue(field.fieldId, jurisdiction, filled);
       if (val !== undefined && val !== null) filled[field.name] = val;
     }
@@ -151,6 +166,7 @@ export default function Home() {
                   value={formData[field.name]}
                   onChange={handleFieldChange}
                   jurisdictionCode={jurisdiction}
+                  formData={formData}
                 />
               ))}
             </div>

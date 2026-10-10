@@ -1,0 +1,2552 @@
+{
+  "AL": {
+    "profileSlug": "AL_2022",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{8}",
+        "placeholder": "50764683",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "7 random digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "AL_2024_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262023",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2023)",
+        "onKeyup": "makeDOEfromDOI_full(4)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262027",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 5 years after the year of issue",
+        "calcOnclick": "makeDOEfromDOI_full(4)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[0-9]+",
+        "placeholder": "50764683783372324201",
+        "minLength": "20",
+        "maxLength": "20",
+        "tooltip": "Document number + 5 random digits + 2 digits of issue year + 3 digits is number of days from the beginning of the year to document + 01. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "AL_2024_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "",
+        "placeholder": "NONE",
+        "minLength": "",
+        "maxLength": "",
+        "tooltip": "",
+        "calcOnclick": "",
+        "onKeyup": ""
+      }
+    }
+  },
+  "AK": {
+    "profileSlug": "AK",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{7}",
+        "placeholder": "7476172",
+        "minLength": "7",
+        "maxLength": "7",
+        "tooltip": "You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "AK_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2020)",
+        "onKeyup": "makeDOEfromDOI(8)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152028",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "As of Tanuary 2019, 8 years, expires on birthday in 7th or 8th year; previously issued cards, 5 years.",
+        "calcOnclick": "makeRandomDOE(8)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[0-9]{10}",
+        "placeholder": "1000728920",
+        "minLength": "10",
+        "maxLength": "10",
+        "tooltip": "10 digits. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "AK_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{7}\\s[0-9]{9}[a-zA-Z]{3}-[01]",
+        "placeholder": "8475992 460200826PNV-1",
+        "minLength": "22",
+        "maxLength": "22",
+        "tooltip": "7 digits + whitespace + 3 ditis + issue date (YYMMDD) + 3 letters + -1 or -0. You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "AK_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "AZ": {
+    "profileSlug": "AZ_2023",
+    "fields": {
+      "DAQ": {
+        "pattern": "[a-zA-Z][0-9]{8}",
+        "placeholder": "D28375514",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "Letter + 8 random digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "AZ_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "12262016",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2023)",
+        "onKeyup": ""
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152035",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 6 years after the year of issue",
+        "calcOnclick": "AZ_makeRandomDOE()",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[a-zA-Z0-9]{11}",
+        "placeholder": "48908420864",
+        "minLength": "11",
+        "maxLength": "11",
+        "tooltip": "You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "AZ_2023_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{4}[a-zA-Z0-9]{2}[0-9]{3}[a-zA-Z][0-9]{4}[a-zA-Z][0-9]",
+        "placeholder": "5641GS561D7977J0",
+        "minLength": "16",
+        "maxLength": "16",
+        "tooltip": "You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "AZ_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "AR": {
+    "profileSlug": "AR",
+    "fields": {
+      "DAQ": {
+        "pattern": "9[0-9]{8}",
+        "placeholder": "926203938",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "'9' + 8 digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "AR_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2018)",
+        "onKeyup": "makeDOEfromDOI(8)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "011520286",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 8 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(8)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "02101[0-9]{11}",
+        "placeholder": "0210119836604160",
+        "minLength": "16",
+        "maxLength": "16",
+        "tooltip": "02101 + 11 digtis. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "AR_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{9,10} [0-9]{4}",
+        "placeholder": "212232102 2160",
+        "minLength": "14",
+        "maxLength": "15",
+        "tooltip": "9 or 10 digtis + ' ' + 4 digits. You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "AR_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "CA": {
+    "profileSlug": "CA_2024",
+    "fields": {
+      "DAQ": {
+        "pattern": "[a-zA-Z][0-9]{7}",
+        "placeholder": "D1234567",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Random letter + 7 random digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "CA_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "11262025",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Valid issue period is 10/20/2025 - till now",
+        "calcOnclick": "makeRandomDOI(2025)",
+        "onKeyup": "makeDOEfromDOI(5)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152030",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 5 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(5)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "",
+        "placeholder": "21237D12345670401",
+        "minLength": "",
+        "maxLength": "",
+        "tooltip": "First 2 digits is issue year. Next 3 digits is number of days from the beginning of the year to document. Next numbers is document number + 0401. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "CA_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "",
+        "placeholder": "08/25/202165508/AAFD/26",
+        "minLength": "",
+        "maxLength": "",
+        "tooltip": "First 8 digits is issue date in DD/MM/YYYY format. The last 2 digits is expiry year.  You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "CA_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "CO": {
+    "profileSlug": "CO_2022",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{9}",
+        "placeholder": "316168738",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "9 random digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "CO_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "02212023",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2022)",
+        "onKeyup": "makeDOEfromDOI(5)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152028",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 6 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(5)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "",
+        "placeholder": "",
+        "minLength": "",
+        "maxLength": "",
+        "tooltip": "",
+        "calcOnclick": "",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{7}",
+        "placeholder": "5211068",
+        "minLength": "7",
+        "maxLength": "7",
+        "tooltip": "7 random digits  You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "CO_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "CT": {
+    "profileSlug": "CT",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-2][0-9]{8}",
+        "placeholder": "137010702",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "Month of birth: 01-12 (odd birth year) or 13-24 (even birth year) + 7 random digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "CT_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2018)",
+        "onKeyup": "makeDOEfromDOI(6)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152026",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 6 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(6)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[0-9]{9}CT[0-9a-zA-Z]{4}01",
+        "placeholder": "137010702CT3ENV01",
+        "minLength": "17",
+        "maxLength": "17",
+        "tooltip": "DL Number + 'CT' + special code. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "CT_calculate_ICN_new(this)",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{12}01[a-zA-Z0-9]{4}",
+        "placeholder": "20082614021501MVS1",
+        "minLength": "18",
+        "maxLength": "18",
+        "tooltip": "YYMMDD (Issue date) + 6 digits + 01MV + 2 character.  You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "CT_calculate_DD(this)",
+        "onKeyup": ""
+      }
+    }
+  },
+  "DE": {
+    "profileSlug": "DE",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{7}",
+        "placeholder": "1653296",
+        "minLength": "7",
+        "maxLength": "7",
+        "tooltip": "7 digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "DE_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2018)",
+        "onKeyup": "makeDOEfromDOI(8)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152028",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 8 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(8)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[0-9]{16}",
+        "placeholder": "0110157073938301",
+        "minLength": "16",
+        "maxLength": "16",
+        "tooltip": "0110 + 12 digits. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "DE_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "L[0-9]{8}[0-9]{6}[a-zA-Z]",
+        "placeholder": "L20200826649034C",
+        "minLength": "16",
+        "maxLength": "16",
+        "tooltip": "L + issue datae (YYYYMMDD) + 6 digits + letter. You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "DE_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "DC": {
+    "profileSlug": "DC",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{7}",
+        "placeholder": "",
+        "minLength": "7",
+        "maxLength": "7",
+        "tooltip": "7 digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "DC_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2019)",
+        "onKeyup": "makeDOEfromDOI(8)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152028",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 8 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(8)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "",
+        "placeholder": "",
+        "minLength": "",
+        "maxLength": "",
+        "tooltip": "",
+        "calcOnclick": "",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{8}",
+        "placeholder": "99423549",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "DC_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "FL": {
+    "profileSlug": "FL",
+    "fields": {
+      "DAQ": {
+        "pattern": "[a-zA-Z][0-9]{12}",
+        "placeholder": "H655435851100",
+        "minLength": "13",
+        "maxLength": "13",
+        "tooltip": "Random letter + 12 random digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "FL_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262021",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY formatw",
+        "calcOnclick": "makeRandomDOI(2018)",
+        "onKeyup": "makeDOEfromDOI(5)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152028",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 5 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(8)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[0-9]{16}",
+        "placeholder": "0100385619573853",
+        "minLength": "16",
+        "maxLength": "16",
+        "tooltip": "0100 + 12 random digits. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "FL_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[a-zA-Z][0-9]{12}",
+        "placeholder": "N322108265187",
+        "minLength": "",
+        "maxLength": "",
+        "tooltip": "You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "FL_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "GA": {
+    "profileSlug": "GA_2019",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{9}",
+        "placeholder": "089007583",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "9 random digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "GA_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2019)",
+        "onKeyup": "makeDOEfromDOI(8)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152026",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 6 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(8)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[0-9]{11}",
+        "placeholder": "10001308391",
+        "minLength": "11",
+        "maxLength": "11",
+        "tooltip": "1000 + 7 random digits. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "GA_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{18}",
+        "placeholder": "026568004260034885",
+        "minLength": "18",
+        "maxLength": "18",
+        "tooltip": "11 random digits + '00' + 5 random digits.  You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "GA_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "HI": {
+    "profileSlug": "HI",
+    "fields": {
+      "DAQ": {
+        "pattern": "H[0-9]{8}",
+        "placeholder": "H00716258",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "H + 8 digts. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "HI_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2018)",
+        "onKeyup": "makeDOEfromDOI(8)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "06052028",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 8 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(8)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "",
+        "placeholder": "",
+        "minLength": "",
+        "maxLength": "",
+        "tooltip": "",
+        "calcOnclick": "",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "",
+        "placeholder": "20200826662548377772-ICWH",
+        "minLength": "10",
+        "maxLength": "34",
+        "tooltip": "Issue date (YYYYMMDD) + digts and letters. You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "HI_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "ID": {
+    "profileSlug": "ID_2023",
+    "fields": {
+      "DAQ": {
+        "pattern": "[a-zA-Z]{2}[0-9]{6}[a-zA-Z]",
+        "placeholder": "DX121380D",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "2 letters + six digits + letter. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "ID_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262018",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2023)",
+        "onKeyup": "makeDOEfromDOI(8)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152026",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 6 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(8)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[a-zA-Z0-9]{18}",
+        "placeholder": "MT942941H147175001",
+        "minLength": "18",
+        "maxLength": "18",
+        "tooltip": "18 characters. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "ID_calculate_ICN_2023()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{15}",
+        "placeholder": "748649745263992",
+        "minLength": "15",
+        "maxLength": "15",
+        "tooltip": "15 digits. You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "ID_calculate_DD_2023()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "IL": {
+    "profileSlug": "IL",
+    "fields": {
+      "DAQ": {
+        "pattern": "[a-zA-Z][0-9]{11}",
+        "placeholder": "D83877907578",
+        "minLength": "12",
+        "maxLength": "12",
+        "tooltip": "First digit of the Last Name + 11 random digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "IL_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262021",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Valid issue period is 09/17/2015 - till now",
+        "calcOnclick": "makeRandomDOI(2019)",
+        "onKeyup": "makeDOEfromDOI(4)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152028",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 5 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(4)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[a-zA-Z0-9]{20}",
+        "placeholder": "D83877907578ILO9TL01",
+        "minLength": "20",
+        "maxLength": "20",
+        "tooltip": "First 12 characters is Document Number. Random characters + 01. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "IL_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[a-zA-Z0-9]{17}",
+        "placeholder": "20210826494MG4931",
+        "minLength": "17",
+        "maxLength": "17",
+        "tooltip": "First 8 digits is issue date in YYYYMMDD format. The last 3 random digits + 2 random letters + 4 random digits.  You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "IL_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "IN": {
+    "profileSlug": "IN",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{4}-[0-9]{2}-[0-9]{4}",
+        "placeholder": "2739-94-6144",
+        "minLength": "12",
+        "maxLength": "12",
+        "tooltip": "4 digits - 2 digits - 4 digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "IN_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2019)",
+        "onKeyup": "makeDOEfromDOI(6)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152026",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 6 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(6)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[0-9]{16}",
+        "placeholder": "0370101906831627",
+        "minLength": "16",
+        "maxLength": "16",
+        "tooltip": "03701 + 11 digits. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "IN_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{14}",
+        "placeholder": "08262081000337",
+        "minLength": "14",
+        "maxLength": "14",
+        "tooltip": "Issue date in MMDDYY format + DL issuing office code (Located under the photo) + 00 + 3 digits. You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "IN_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "IA": {
+    "profileSlug": "IA_2017",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{3}[a-zA-Z]{2}[0-9]{4}",
+        "placeholder": "176ZB6504",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "IA_2011_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY formatw",
+        "calcOnclick": "makeRandomDOI(2019)",
+        "onKeyup": "makeDOEfromDOI(8)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152028",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 8 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(8)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[0-9]{3}[a-zA-Z]{2}[0-9]{4}[0-9]{9}",
+        "placeholder": "176ZB6504162400101",
+        "minLength": "18",
+        "maxLength": "18",
+        "tooltip": "Document number + issue year + number of days from the beginning of year (+3 day) + 0101. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "IA_2017_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{9}[a-zA-Z]{2}[0-9]{4}[MF][0-9]{6}[a-zA-Z]",
+        "placeholder": "173604035DJ6050M150124D",
+        "minLength": "23",
+        "maxLength": "23",
+        "tooltip": "9 digits + first letter of last name + first letter of first name + 4 digits + sex + expiry date (MMDDYY) + R. You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "IA_2017_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "KS": {
+    "profileSlug": "KS",
+    "fields": {
+      "DAQ": {
+        "pattern": "K[0-9]{2}-[0-9]{2}-[0-9]{4}",
+        "placeholder": "K00-45-2697",
+        "minLength": "11",
+        "maxLength": "11",
+        "tooltip": "You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "KS_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2018)",
+        "onKeyup": "makeDOEfromDOI(6)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152026",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. Validity 6 years for 21-64 years old. If age is more than 64 years or less than 21 - the validity period is 4 years",
+        "calcOnclick": "makeRandomDOE(6)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[0-9]{5}[a-zA-Z][0-9]{12}",
+        "placeholder": "20242K004526970101",
+        "minLength": "18",
+        "maxLength": "18",
+        "tooltip": "You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "KS_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{11}[a-zA-Z]{2}[0-9]{5}[mMfF][0-9]{4}[a-zA-Z]{2}",
+        "placeholder": "72405466640DJ20240M2615AB",
+        "minLength": "25",
+        "maxLength": "25",
+        "tooltip": "You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "KS_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "KY": {
+    "profileSlug": "KY_2018",
+    "fields": {
+      "DAQ": {
+        "pattern": "[a-zA-Z][0-9]{8}",
+        "placeholder": "D63091036",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "First letter of the Laste name + 8 digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "KY_2012_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01222022",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2022)",
+        "onKeyup": ""
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01162026",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day + 1 as in birth date. 4 years after the year of issue",
+        "calcOnclick": "KY_2012_calculate_DOE(4)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[0-9]{16}",
+        "placeholder": "0460107954698883",
+        "minLength": "16",
+        "maxLength": "16",
+        "tooltip": "'04601' + 11 random digits. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "KY_2018_claculatee_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{16}\\s[0-9]{5}",
+        "placeholder": "2022012288217092 01111",
+        "minLength": "22",
+        "maxLength": "22",
+        "tooltip": "Date of issue (YYYYMMDD) + 8 random digits + '' + '01111'. You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "KY_2018_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "LA": {
+    "profileSlug": "LA",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{9}",
+        "placeholder": "007343439",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "00 or 01 + 7 digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "LA_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262018",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2018)",
+        "onKeyup": "makeDOEfromDOI(6)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152024",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 6 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(6)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "00700[0-9]{11}",
+        "placeholder": "0070031972215065",
+        "minLength": "16",
+        "maxLength": "16",
+        "tooltip": "00700 + 11 random digits. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "LA_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "",
+        "placeholder": "",
+        "minLength": "",
+        "maxLength": "",
+        "tooltip": "",
+        "calcOnclick": "",
+        "onKeyup": ""
+      }
+    }
+  },
+  "ME": {
+    "profileSlug": "ME",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{7}",
+        "placeholder": "9278451",
+        "minLength": "7",
+        "maxLength": "7",
+        "tooltip": "7 random digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "ME_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2019)",
+        "onKeyup": "makeDOEfromDOI(6)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152026",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 6 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(6)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "F[0-9]{12}0101",
+        "placeholder": "F2024392784510101",
+        "minLength": "17",
+        "maxLength": "17",
+        "tooltip": "You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "ME_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "0{17}[0-9]{8}",
+        "placeholder": "0000000000000000035222862",
+        "minLength": "25",
+        "maxLength": "25",
+        "tooltip": "17 zeros + 8 digits.  You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "ME_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "MD": {
+    "profileSlug": "MD_2021",
+    "fields": {
+      "DAQ": {
+        "pattern": "MD-[0-9]{11}",
+        "placeholder": "MD-10276307832",
+        "minLength": "14",
+        "maxLength": "14",
+        "tooltip": "MD + 11 digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "MD_2021_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262025",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2022)",
+        "onKeyup": "makeDOEfromDOI(8)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152033",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 8 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(8)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "10[0-9]{8}",
+        "placeholder": "1010273942",
+        "minLength": "10",
+        "maxLength": "10",
+        "tooltip": "'101' + 7 digits. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "MD_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[a-zA-Z0-9]{9}",
+        "placeholder": "329878356",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "9 digits and letters. You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "MD_2021_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "MA": {
+    "profileSlug": "MA",
+    "fields": {
+      "DAQ": {
+        "pattern": "S[a-zA-Z0-9]{8}",
+        "placeholder": "S94506149",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "S + 8 random digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "MA_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2017)",
+        "onKeyup": "makeDOEfromDOI(5)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152025",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 5 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(5)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[0-9]{5}[a-zA-Z0-9]{9}0601",
+        "placeholder": "20239S945061490601",
+        "minLength": "18",
+        "maxLength": "18",
+        "tooltip": "You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "MA_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{8}\\sREV\\s02222016",
+        "placeholder": "08262020 REV 02222016",
+        "minLength": "21",
+        "maxLength": "21",
+        "tooltip": "Issue date + revision date  You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "MA_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "MI": {
+    "profileSlug": "MI",
+    "fields": {
+      "DAQ": {
+        "pattern": "[a-zA-Z]\\s[0-9]{3}\\s[0-9]{3}\\s[0-9]{3}\\s[0-9]{3}",
+        "placeholder": "D 000 429 497 042",
+        "minLength": "17",
+        "maxLength": "17",
+        "tooltip": "You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "MI_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2019)",
+        "onKeyup": "makeDOEfromDOI(4)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152024",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 4 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(4)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[a-zA-Z][0-9]{24}",
+        "placeholder": "D000429497042197001152024",
+        "minLength": "25",
+        "maxLength": "25",
+        "tooltip": "Document number + birth date (YYYYMMDD) + issue year (YYYY). You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "MI_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "",
+        "placeholder": "",
+        "minLength": "",
+        "maxLength": "",
+        "tooltip": "",
+        "calcOnclick": "",
+        "onKeyup": ""
+      }
+    }
+  },
+  "MN": {
+    "profileSlug": "MN",
+    "fields": {
+      "DAQ": {
+        "pattern": "[a-zA-Z][0-9]{12}",
+        "placeholder": "T403223261033",
+        "minLength": "13",
+        "maxLength": "13",
+        "tooltip": "One letter and 12 numbers. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "MN_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2019)",
+        "onKeyup": "makeDOEfromDOI(4)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152024",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 4 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(4)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[a-zA-Z][0-9]{12}01[0-9]{3}01",
+        "placeholder": "T4032232610330124301",
+        "minLength": "20",
+        "maxLength": "20",
+        "tooltip": "Document number + '01' + number of days from the beginning of year to issue date + '01'. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "MN_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "0{7}[0-9]{7}",
+        "placeholder": "00000006518117",
+        "minLength": "14",
+        "maxLength": "14",
+        "tooltip": "7 zeros + 7 random digits.  You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "MN_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "MS": {
+    "profileSlug": "MS_2023",
+    "fields": {
+      "DAQ": {
+        "pattern": "80[0-9]{7}",
+        "placeholder": "809430018",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "'80' + 7 random digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "MS_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2024)",
+        "onKeyup": "makeDOEfromDOI(4)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152024",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 4 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(4)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "05100[0-9]{11}",
+        "placeholder": "0510035326620190",
+        "minLength": "16",
+        "maxLength": "16",
+        "tooltip": "'05100' + 11 random digits. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "MS_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9][a-zA-Z][a-zA-Z0-9]{7}[0-9][a-zA-Z]{2}[0-9]{5}[MF][0-9]{4}[a-zA-Z]",
+        "placeholder": "7TMLJG3R10DJ20240M2415A",
+        "minLength": "25",
+        "maxLength": "25",
+        "tooltip": "You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "MS_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "MO": {
+    "profileSlug": "MO_2020",
+    "fields": {
+      "DAQ": {
+        "pattern": "[a-zA-Z][0-9]{9}",
+        "placeholder": "M096115590",
+        "minLength": "10",
+        "maxLength": "10",
+        "tooltip": "letter + 9 digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "MO_2020_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2020)",
+        "onKeyup": "makeDOEfromDOI(6)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152026",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 6 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(6)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[0-9]{5}[a-zA-Z]{1}[0-9]{13}",
+        "placeholder": "18239S1603164420101",
+        "minLength": "19",
+        "maxLength": "19",
+        "tooltip": "First 2 digtis is issue year (YY), next 3 digits is number of days from issue date + 1. Then document number and '0101. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "MO_2020_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{8}00[0-9]{2}",
+        "placeholder": "201447280083",
+        "minLength": "12",
+        "maxLength": "12",
+        "tooltip": "First 2 digits is issue year (YY) + '14' + 4 digits + '00' + 2 digits. You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "MO_2020_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "MT": {
+    "profileSlug": "MT",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{9}41[0-9]{2}",
+        "placeholder": "0173719704151",
+        "minLength": "13",
+        "maxLength": "13",
+        "tooltip": "birth month + 3 digits + birth year + '41' + birth day. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "MT_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2017)",
+        "onKeyup": "makeDOEfromDOI(8)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152026",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 8 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(8)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "110[a-zA-Z0-9]{9}MT[a-zA-Z0-9]{3}001",
+        "placeholder": "110046MJU9PFMTLLC001",
+        "minLength": "20",
+        "maxLength": "20",
+        "tooltip": "110 + 9 digits and letters + MT + 3 letters + 001. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "MT_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{8}[a-zA-Z0-9]{12}",
+        "placeholder": "20200826869633619021",
+        "minLength": "20",
+        "maxLength": "20",
+        "tooltip": "Issue data in YYYYMMDD format + 12 digits. You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "MT_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "NE": {
+    "profileSlug": "NE_2021",
+    "fields": {
+      "DAQ": {
+        "pattern": "[a-zA-Z][0-9]{8}",
+        "placeholder": "B94907169",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "Letter (A, B, C, E, G, H or V) and 8 numbers. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "NE_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "12292021",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2021, 2021)",
+        "onKeyup": "makeDOEfromDOI(5)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "07292026",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 5 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(5)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[a-zA-Z][0-9]{8}[a-zA-Z0-9]{8}",
+        "placeholder": "B94907169NETYCO01",
+        "minLength": "17",
+        "maxLength": "17",
+        "tooltip": "You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "NE_2021_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{3}[a-zA-Z][0-9]{8}[a-zA-Z0-9]{13}",
+        "placeholder": "054B94907169NETYCO0165097",
+        "minLength": "25",
+        "maxLength": "25",
+        "tooltip": "You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "NE_2021_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "NV": {
+    "profileSlug": "NV_2021",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{10}",
+        "placeholder": "1314295172",
+        "minLength": "10",
+        "maxLength": "10",
+        "tooltip": "10 random digits and letter. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "NV_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2021, 2021)",
+        "onKeyup": "makeDOEfromDOI(8)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152028",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 6 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(8)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "001[0-9]{8}01",
+        "placeholder": "0015969352901",
+        "minLength": "13",
+        "maxLength": "13",
+        "tooltip": "'001' + 8 random digits + '01'.You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "NV_2021_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "0001[0-9]{17}",
+        "placeholder": "000144360705221148270",
+        "minLength": "21",
+        "maxLength": "21",
+        "tooltip": "'0001' + 17 random digits.  You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "NV_calculate_DD(this)",
+        "onKeyup": ""
+      }
+    }
+  },
+  "NH": {
+    "profileSlug": "NH_2024",
+    "fields": {
+      "DAQ": {
+        "pattern": "NH[LN][0-9]{8}",
+        "placeholder": "NHL10501102",
+        "minLength": "11",
+        "maxLength": "11",
+        "tooltip": "'NHL' + 8 random digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "NH_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262024",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2025)",
+        "onKeyup": "makeDOEfromDOI(5)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152029",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 5 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(5)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "0[0-9]{7}",
+        "placeholder": "08494818",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "NH_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "0[0-9]{7}",
+        "placeholder": "08494818",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "NH_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "NJ": {
+    "profileSlug": "NJ_2020",
+    "fields": {
+      "DAQ": {
+        "pattern": "[a-zA-Z][0-9]{14}",
+        "placeholder": "D26229134787273",
+        "minLength": "15",
+        "maxLength": "15",
+        "tooltip": "First letter of Last name + 14 digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "NJ_2020_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2021)",
+        "onKeyup": "makeDOEfromDOI(4)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152024",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 6 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(4)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[a-zA-Z][a-zA-Z0-9]{17}",
+        "placeholder": "DWCDQP3F98YNLD8M01",
+        "minLength": "18",
+        "maxLength": "18",
+        "tooltip": "First letter of Last name + 13 digits and letters + '8M01'. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "NJ_2020_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[a-zA-Z0-9]{17}",
+        "placeholder": "WV202023900007318",
+        "minLength": "17",
+        "maxLength": "17",
+        "tooltip": "Option 1 + issue year (YYYY) + number of days from the beginnig of year to issue date + '0000' + 4 digits. You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "NJ_2020_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "NM": {
+    "profileSlug": "NM",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{9}",
+        "placeholder": "036408091",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "9 digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "NM_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2020)",
+        "onKeyup": "makeRandomDOE_minus_day_key(8)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08252028",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "",
+        "calcOnclick": "makeRandomDOE_minus_day(8)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[0-9]{11}",
+        "placeholder": "03640809101",
+        "minLength": "11",
+        "maxLength": "11",
+        "tooltip": "Document number + 01. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "NM_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "",
+        "placeholder": "",
+        "minLength": "",
+        "maxLength": "",
+        "tooltip": "",
+        "calcOnclick": "",
+        "onKeyup": ""
+      }
+    }
+  },
+  "NY": {
+    "profileSlug": "NY_2022",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{9}",
+        "placeholder": "759547815",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "NY_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY",
+        "calcOnclick": "makeRandomDOI(2022)",
+        "onKeyup": "makeDOEfromDOI(8)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152028",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 8 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(8)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "",
+        "placeholder": "",
+        "minLength": "",
+        "maxLength": "",
+        "tooltip": "",
+        "calcOnclick": "",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[a-zA-Z0-9]{10}",
+        "placeholder": "C6JEH2RP06",
+        "minLength": "10",
+        "maxLength": "10",
+        "tooltip": "10 random characters.  You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "NY_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "NC": {
+    "profileSlug": "NC",
+    "fields": {
+      "DAQ": {
+        "pattern": "0000[0-9]{8}",
+        "placeholder": "000007886015",
+        "minLength": "12",
+        "maxLength": "12",
+        "tooltip": "5 zeros + 7 random digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "NC_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262016",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2015)",
+        "onKeyup": "makeDOEfromDOI(8)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152024",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 8 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(8)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "0000[0-9]{8}NC[a-zA-Z0-9]{4}01",
+        "placeholder": "000007886015NCXR9S01",
+        "minLength": "20",
+        "maxLength": "20",
+        "tooltip": "You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "NC_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "00[0-9]{8}",
+        "placeholder": "0015245648",
+        "minLength": "10",
+        "maxLength": "10",
+        "tooltip": "Document number + audit information  You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "NC_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "ND": {
+    "profileSlug": "ND_2023",
+    "fields": {
+      "DAQ": {
+        "pattern": "[a-zA-Z]{3}[0-9]{6}",
+        "placeholder": "DOE707980",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": ". You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "ND_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2024)",
+        "onKeyup": "makeDOEfromDOI(4)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152026",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 6 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(4)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[0-9]{16}",
+        "placeholder": "0340018171565059",
+        "minLength": "16",
+        "maxLength": "16",
+        "tooltip": "'03400' + 11 random digits. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "ND_2023_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9][a-zA-Z]{3}[0-9]{6}[a-zA-Z]{2}[0-9]{5}[a-z][A-Z][0-9]{2}[a-zA-Z]DZ",
+        "placeholder": "7DOE707980DJ78517vP48NDZ",
+        "minLength": "24",
+        "maxLength": "24",
+        "tooltip": "Decade of birth year + DL Number + Last and First name initials + 4 digits + lowecase and uppercase letter + 2 digits + 'NDZ'.  You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "ND_2023_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "OH": {
+    "profileSlug": "OH",
+    "fields": {
+      "DAQ": {
+        "pattern": "[a-zA-Z]{2}[0-9]{6}",
+        "placeholder": "KD298593",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Two letters and six numbers. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "OH_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2019)",
+        "onKeyup": "makeDOEfromDOI(4)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152026",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 6 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(4)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[a-zA-Z][0-9]{8}",
+        "placeholder": "L93259228",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "random letter + 8 random digits. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "OH_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{9}",
+        "placeholder": "889287786",
+        "minLength": "7",
+        "maxLength": "9",
+        "tooltip": "9 random digits.  You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "OH_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "OK": {
+    "profileSlug": "OK",
+    "fields": {
+      "DAQ": {
+        "pattern": "[a-zA-Z][0-9]{9}",
+        "placeholder": "S576189157",
+        "minLength": "10",
+        "maxLength": "10",
+        "tooltip": "Letter + 08 + 7 digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "OK_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2020);OK_calculate_REAL_ID()",
+        "onKeyup": "OK_calculate_REAL_ID()"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "09312024",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Last day of month. 4 years after the year of issue",
+        "calcOnclick": "OK_calculate_DOE(4)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[a-zA-Z][0-9]{9}OK[a-zA-Z0-9]{6}",
+        "placeholder": "S576189157OKYRSL01",
+        "minLength": "18",
+        "maxLength": "18",
+        "tooltip": "Document number + OK + 4 letters + 01. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "OK_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[a-zA-Z][0-9]{9}[0-9]{12}[a-zA-Z]",
+        "placeholder": "S576189157011570082620R",
+        "minLength": "23",
+        "maxLength": "23",
+        "tooltip": "Documunet number + Date of birth (MMDDYY) + issue date (MMDDYY) + letter. You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "OK_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "OR": {
+    "profileSlug": "OR",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{7}",
+        "placeholder": "8456732",
+        "minLength": "7",
+        "maxLength": "7",
+        "tooltip": "7 random digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "OR_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2019)",
+        "onKeyup": "makeDOEfromDOI(8)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152028",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 6 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(8)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[a-zA-Z0-9]{9}",
+        "placeholder": "AA7088159",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "'AA' + 7 random digits. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "OR_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "200[0-9]{6}",
+        "placeholder": "200117013",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "'200' + 6 random digits.  You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "OR_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "PA": {
+    "profileSlug": "PA_2022",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{8}",
+        "placeholder": "95744057",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "8 random digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "PA_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262023",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2023)",
+        "onKeyup": "makeDOEfromDOI(4)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01162024",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 6 years after the year of issue",
+        "calcOnclick": "makeRandomDOE_plus_day(4)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "02500[0-9]{11}",
+        "placeholder": "0250018505120106",
+        "minLength": "16",
+        "maxLength": "16",
+        "tooltip": "You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "PA_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{25}",
+        "placeholder": "2023967803632140000058560",
+        "minLength": "25",
+        "maxLength": "25",
+        "tooltip": "You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "PA_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "RI": {
+    "profileSlug": "RI_2022",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{7}|[0-9]{8}",
+        "placeholder": "3755008",
+        "minLength": "7",
+        "maxLength": "8",
+        "tooltip": "You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "RI_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2023)",
+        "onKeyup": "makeDOEfromDOI(4)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152025",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 5 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(4)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "O[0-9]{7}RI[a-zA-Z0-9]{3}L01",
+        "placeholder": "O3755008RIJTTL01",
+        "minLength": "16",
+        "maxLength": "16",
+        "tooltip": "O + Document Number + RI + 3 characters + L01. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "RI_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]+",
+        "placeholder": "4052356",
+        "minLength": "",
+        "maxLength": "",
+        "tooltip": "7 random digits.\n            You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "RI_calculate_DD_2022()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "SC": {
+    "profileSlug": "SC",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{9}",
+        "placeholder": "107844741",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "9 random digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "SC_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2018)",
+        "onKeyup": "makeDOEfromDOI(8)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152028",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 8 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(8)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "",
+        "placeholder": "",
+        "minLength": "",
+        "maxLength": "",
+        "tooltip": "",
+        "calcOnclick": "",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{19}",
+        "placeholder": "8513940203280844439",
+        "minLength": "19",
+        "maxLength": "19",
+        "tooltip": "You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "SC_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "SD": {
+    "profileSlug": "SD",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{8}",
+        "placeholder": "01384574",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "8 digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "SD_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2018)",
+        "onKeyup": "makeDOEfromDOI(5)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152026",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 5 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(5)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "042000[0-9]{10}",
+        "placeholder": "",
+        "minLength": "16",
+        "maxLength": "16",
+        "tooltip": "042000 + 10 digits. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "SD_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{23}",
+        "placeholder": "",
+        "minLength": "23",
+        "maxLength": "23",
+        "tooltip": "You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "SD_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "TN": {
+    "profileSlug": "TN",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{9}",
+        "placeholder": "145065024",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "TN_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262018",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2016);TN_calculate_REAL_ID();",
+        "onKeyup": "makeDOEfromDOI_full(8); TN_calculate_REAL_ID()"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152026",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "After 2016 - 8 years after issue. Expires on the day of issue. Until 2016, 3-7 years after issue. Expires on birthday.",
+        "calcOnclick": "makeRandomDOE_fromDOI(8)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[0-9]{14}0101",
+        "placeholder": "182381070085030101",
+        "minLength": "18",
+        "maxLength": "18",
+        "tooltip": "YY issue year + number of days from beginnig of the year to issue date + '0101'. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "TN_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{16}",
+        "placeholder": "4601808269812264",
+        "minLength": "16",
+        "maxLength": "16",
+        "tooltip": "2 digits + '0' + issue date (YYMMDD) + 7 random digits. You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "TN_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "TX": {
+    "profileSlug": "TX_2020",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{8}",
+        "placeholder": "24253231",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "8 random digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "TX_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262021",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Valid issue period is 02/23/2020 - till now",
+        "calcOnclick": "makeRandomDOI(2021)",
+        "onKeyup": "makeDOEfromDOI(6)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152028",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 6 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(6)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[0-9\\s]+",
+        "placeholder": "10001846127",
+        "minLength": "11",
+        "maxLength": "11",
+        "tooltip": "'0000' + 7 random digits. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "TX_2020_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]+",
+        "placeholder": "92334268049701405070",
+        "minLength": "20",
+        "maxLength": "20",
+        "tooltip": "20 digits with custom algorithm.  Please click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "TX_calculate_DD_improved()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "UT": {
+    "profileSlug": "UT_2021",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{9}",
+        "placeholder": "182162827",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "9 random digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "UT_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262023",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2023, 2023)",
+        "onKeyup": "makeDOEfromDOI(5)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152028",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. After January 2020 - 8 years after the year of issue. Before January 2020 - 5 years after the year of issue.",
+        "calcOnclick": "makeRandomDOE(5)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[0-9]{9}UT[a-zA-Z0-9]{4}01",
+        "placeholder": "182162827UTQ8CW01",
+        "minLength": "17",
+        "maxLength": "17",
+        "tooltip": "Document number + 'UT' + 4 digits and letters + '01'. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "UT_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{8}",
+        "placeholder": "32656373",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "8 random digits. You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "UT_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "VT": {
+    "profileSlug": "VT",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{7}[a-zA-Z0-9]{1}",
+        "placeholder": "12345678",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "VT_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262022",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2022)",
+        "onKeyup": "makeDOEfromDOI(4)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152026",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 4 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(4)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "",
+        "placeholder": "",
+        "minLength": "",
+        "maxLength": "",
+        "tooltip": "",
+        "calcOnclick": "",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{17}[0-9a-zA-Z]{1}",
+        "placeholder": "072022123412345678",
+        "minLength": "18",
+        "maxLength": "18",
+        "tooltip": "Issue date (MMDDYY) + 4 digits + DL number. You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "VT_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "VA": {
+    "profileSlug": "VA",
+    "fields": {
+      "DAQ": {
+        "pattern": "[a-zA-Z][0-9]{8}",
+        "placeholder": "A37262186",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "Letter + 8 digits. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "VA_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2017)",
+        "onKeyup": "makeDOEfromDOI(8)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152028",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 8 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(8)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "00601[0-9]{11}",
+        "placeholder": "0060101096491223",
+        "minLength": "16",
+        "maxLength": "16",
+        "tooltip": "'00601' + 11 digits. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "VA_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "0[0-9]{8}",
+        "placeholder": "099750996",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "'0' + 8 digits. You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "VA_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "WA": {
+    "profileSlug": "WA_2025",
+    "fields": {
+      "DAQ": {
+        "pattern": "WDL[a-zA-Z0-9]{8}B",
+        "placeholder": "WDL5NHA2R3KB",
+        "minLength": "12",
+        "maxLength": "12",
+        "tooltip": "WDL + 8 random digits and letters + B. You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "WA_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262025",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2025)",
+        "onKeyup": "makeDOEfromDOI(5)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152030",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 5 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(5)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "",
+        "placeholder": "",
+        "minLength": "",
+        "maxLength": "",
+        "tooltip": "",
+        "calcOnclick": "",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "WDL[a-zA-Z0-9]{8}B[a-zA-Z][0-9]{12}",
+        "placeholder": "WDL5NHA2R3KBP082625148509",
+        "minLength": "25",
+        "maxLength": "25",
+        "tooltip": "Document number + audit information  You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "WA_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "WV": {
+    "profileSlug": "WV",
+    "fields": {
+      "DAQ": {
+        "pattern": "[a-zA-Z0-9]{1}[0-9]{6}",
+        "placeholder": "F123785",
+        "minLength": "7",
+        "maxLength": "7",
+        "tooltip": "You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "WV_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2020)",
+        "onKeyup": "makeDOEfromDOI(6)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152028",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 8 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(6)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "[a-zA-Z0-9]{7}WV[a-zA-Z0-9]{6}",
+        "placeholder": "F123785WVFLOY01",
+        "minLength": "15",
+        "maxLength": "15",
+        "tooltip": "Document number + 'WV' + 4 letters + '01' You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "WV_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "[0-9]{6}[a-zA-Z]{2}[0-9]{4}",
+        "placeholder": "011570DJ2601",
+        "minLength": "12",
+        "maxLength": "12",
+        "tooltip": "Date of birth (MMDDYY) + First letter of last name + first letter of first name + expiry data (YYDD). You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "WV_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "WI": {
+    "profileSlug": "WI_2023",
+    "fields": {
+      "DAQ": {
+        "pattern": "[a-zA-Z][0-9]{3}-[0-9]{4}-[0-9]{4}-[0-9]{2}",
+        "placeholder": "D000-4607-0015-00",
+        "minLength": "17",
+        "maxLength": "17",
+        "tooltip": "You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "WI_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2016)",
+        "onKeyup": "makeDOEfromDOI(8)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152028",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. 8 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(8)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "0130[0-9]{12}",
+        "placeholder": "0130100816849209",
+        "minLength": "16",
+        "maxLength": "16",
+        "tooltip": "'0130100' + 9 digits. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "WI_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "OT[a-zA-Z]{3}[0-9]{16}",
+        "placeholder": "OTDKF2020082610924996",
+        "minLength": "21",
+        "maxLength": "21",
+        "tooltip": "'OT' + first letter of Last name + issue date (YYYYMMDD) + 8 digits. You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "WI_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  },
+  "WY": {
+    "profileSlug": "WY",
+    "fields": {
+      "DAQ": {
+        "pattern": "[0-9]{9}",
+        "placeholder": "115919618",
+        "minLength": "9",
+        "maxLength": "9",
+        "tooltip": "You can click on the calculator icon to calculate number automatically!",
+        "calcOnclick": "WY_calculate_documentNumber()",
+        "onKeyup": ""
+      },
+      "DBD": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "08262020",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "You need input the date in MMDDYYYY format",
+        "calcOnclick": "makeRandomDOI(2020)",
+        "onKeyup": "makeDOEfromDOI(5)"
+      },
+      "DBA": {
+        "pattern": "((((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02)(0[1-9]|[1][0-9]|2[0-8]))([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3}))|(0229(([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00)))",
+        "placeholder": "01152025",
+        "minLength": "8",
+        "maxLength": "8",
+        "tooltip": "Same month and day as in birth date. After July 2019 5 years, before that 4 years after the year of issue",
+        "calcOnclick": "makeRandomDOE(5)",
+        "onKeyup": ""
+      },
+      "DCK": {
+        "pattern": "10000[0-9]{5}",
+        "placeholder": "1000038857",
+        "minLength": "10",
+        "maxLength": "10",
+        "tooltip": "10000 + 5 digits. You can click on the calculator icon to calculate ICN automatically!",
+        "calcOnclick": "WY_calculate_ICN()",
+        "onKeyup": ""
+      },
+      "DCF": {
+        "pattern": "10000[0-9]{5}",
+        "placeholder": "1000038857",
+        "minLength": "10",
+        "maxLength": "10",
+        "tooltip": "10000 + 5 digits. Same as ICN. You can click on the calculator icon to calculate DD automatically!",
+        "calcOnclick": "WY_calculate_DD()",
+        "onKeyup": ""
+      }
+    }
+  }
+}

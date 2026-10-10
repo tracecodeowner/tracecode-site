@@ -3,7 +3,7 @@
 
 import {
   JURISDICTIONS, getJurisdiction, getFieldDef, getFields,
-  PROFILES, DEFAULT_FIELD_ORDER,
+  getStateProfile, STATE_PAYLOAD_RULES, PROFILES, DEFAULT_FIELD_ORDER,
 } from './jurisdictions.js';
 
 // Control characters (actual ASCII bytes)
@@ -136,7 +136,8 @@ export function validateForm(data, jurisdictionCode, profileKey) {
   const errors = {};
   let hasErrors = false;
   for (const field of fields) {
-    const result = validateField(field, data[field.name]);
+    if (field.notEncoded) continue;
+    const result = validateField(field, data[field.name], getJurisdiction(jurisdictionCode));
     if (!result.valid) {
       errors[field.name] = result.error;
       if (field.required) hasErrors = true;
@@ -149,6 +150,7 @@ export function validateForm(data, jurisdictionCode, profileKey) {
 
 export function generatePayload(data, jurisdictionCode, profileKey, options = {}) {
   const jur = getJurisdiction(jurisdictionCode);
+  const stateProfile = getStateProfile(jur.code);
   const profile = PROFILES[profileKey] || PROFILES.scandit;
   const { fields } = getFields(jurisdictionCode, profileKey);
 
@@ -161,14 +163,28 @@ export function generatePayload(data, jurisdictionCode, profileKey, options = {}
 
   // Build DL subfile data elements (normalized)
   const dlFields = [];
+  const payloadRules = STATE_PAYLOAD_RULES[jur.code] || {};
+  const defaultValues = {
+    ...STATE_PAYLOAD_RULES.defaultValues,
+    ...payloadRules.defaultValues,
+  };
+  const forceInclude = payloadRules.forceInclude || {};
   for (const field of fields) {
+    if (field.notEncoded) continue;
     let value = data[field.name];
     if (field.autoFill === 'jurisdiction') value = jur.code;
     if (field.autoFill === 'country') value = 'USA';
-    // For Minnesota, always include DAH even if empty (matches verified raw)
-    if ((value === undefined || value === null || value === '') && !(jur.code === 'MN' && field.fieldId === 'DAH')) continue;
+    if (field.autoFill === 'issueDate' && !value) value = data.issueDate;
+    if (field.autoFill === 'stateRevision' && !value) {
+      value = field.autoFillValue || stateProfile?.cardRevisionDate || '';
+    }
+    if ((value === undefined || value === null || value === '') && Object.hasOwn(defaultValues, field.fieldId)) {
+      value = defaultValues[field.fieldId];
+    }
+    const forceField = Object.hasOwn(forceInclude, field.fieldId);
+    if ((value === undefined || value === null || value === '') && !forceField) continue;
     const normalized = normalizeValue(field, value, jur);
-    if (normalized === '') continue;
+    if (normalized === '' && !forceField) continue;
     dlFields.push({ fieldId: field.fieldId, label: field.label, value: normalized, raw: value });
   }
 
@@ -253,8 +269,8 @@ export function generatePayload(data, jurisdictionCode, profileKey, options = {}
     CR,   // Segment Terminator
     ...strToBytes('ANSI '), // 5 bytes with trailing space
     ...strToBytes(jur.iin),
-    ...strToBytes(String(jur.aamvaVersion).padStart(2, '0').substring(0, 2)),
-    ...strToBytes(String(jur.jurisdictionVersion).padStart(2, '0').substring(0, 2)),
+    ...strToBytes(String(jur.aamvaVersion)),
+    ...strToBytes(String(jur.jurisdictionVersion)),
     ...strToBytes(String(numEntries).padStart(2, '0')),
   ];
 
@@ -292,8 +308,8 @@ export function generatePayload(data, jurisdictionCode, profileKey, options = {}
   const payload = new Uint8Array(allBytes);
   const payloadString = bytesToStr(allBytes);
 
-  const jv2 = String(jur.jurisdictionVersion).padStart(2, '0').substring(0, 2);
-  const av2 = String(jur.aamvaVersion).padStart(2, '0').substring(0, 2);
+  const jv2 = String(jur.jurisdictionVersion);
+  const av2 = String(jur.aamvaVersion);
 
   return {
     payload,
